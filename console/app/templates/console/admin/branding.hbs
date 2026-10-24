@@ -57,7 +57,7 @@
                         <a href="javascript:;" class="text-danger text-xs mt-1" {{on "click" this.unsetLogo}}>{{t "console.admin.branding.reset-default"}}</a>
                     </div>
                     <InputGroup @name={{t "console.admin.branding.theme"}}>
-                        <Select @value={{@model.default_theme}} @onSelect={{this.setTheme}} @options={{this.themeOptions}} />
+                        <Select @value={{@model.default_theme}} @onSelect={{this.setTheme}} @options={{this.themeOptions}} @optionValuePath="value" @optionLabelPath="label" />
                     </InputGroup>
                 </form>
             </ContentPanel>

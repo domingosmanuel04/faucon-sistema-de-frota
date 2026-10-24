@@ -1,0 +1,12 @@
+{
+  "created_at": 1792861014,
+  "note": "Do not replace these with fleetbase-console image files",
+  "sha256": {
+    "assets/vendor-06e3449278af5832aa3f5c4ebf12c1fe.js": "b362f72871e99ca7233c32e6bd34b7e2088275b03e896102e280276f8ed50b05",
+    "assets/@fleetbase/console-2eb4b2507bff82bcbbbfb7fd639c3469.js": "9e2dfa117f934fc817578d3985985eb1f89c153500a35db900244a1ab042293f",
+    "assets/pt-ui-runtime.js": "8592bba3c644689f86fa5f406743fdd0da4f2b782223474ddf055f28def10195",
+    "assets/faucon-overrides.css": "1dfebaf0bc11b3aa6dd36e07a3b701ebe0e501503cd9381f6bb5bf8aab75c396",
+    "index.html": "e3332e0d95980e336fee49d165271917b784e0f17cbbb78242d96dc39fc5a881",
+    "favicon/favicon.ico": "b443c8ac809395bcbc8ea180156b71776958e5d8725b120ec5d6112c8ee582d0"
+  }
+}

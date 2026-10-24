@@ -173,14 +173,14 @@ body[data-theme='dark'] .console-dashboard-title h1 {
 }
 
 /*
- * Sign-in provider buttons: each provider's logo and light-mode colours on Fleetbase's
+ * Sign-in provider buttons: each provider's logo and light-mode colours on Faucon's
  * own button shape, size, shadow and icon position.
  *
- *   Light  Google and Microsoft: white with Fleetbase's usual button border, the
+ *   Light  Google and Microsoft: white with Faucon's usual button border, the
  *          full-colour logo (Google forbids a single-colour "G"; Microsoft forbids
  *          altering its logo). Apple: black (Apple HIG). GitHub: #24292F — its mark
  *          is only ever shown in black or white.
- *   Dark   Every provider on Fleetbase's gray-900, so the page reads as one set of
+ *   Dark   Every provider on Faucon's gray-900, so the page reads as one set of
  *          buttons. Apple and GitHub marks turn white with the text; the Google "G"
  *          keeps a white disc, since Google requires it on white.
  *
@@ -192,7 +192,7 @@ body[data-theme='dark'] .console-dashboard-title h1 {
 .oauth-provider-microsoft {
     --oauth-bg: #fff;
     --oauth-bg-hover: #f3f4f6; /* gray-100 */
-    --oauth-border: #d1d5db; /* gray-300, Fleetbase's default button border */
+    --oauth-border: #d1d5db; /* gray-300, Faucon's default button border */
     --oauth-border-hover: #9ca3af; /* gray-400 */
     --oauth-text: #1f2937; /* gray-800 */
 }

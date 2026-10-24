@@ -26,23 +26,31 @@ export default class ConsoleAdminOrganizationsDetailsIndexController extends Con
     }
 
     get statusLabel() {
-        return this.organization?.statusLabel || this.organization?.status || 'active';
+        const raw = String(this.organization?.statusLabel || this.organization?.status || 'active').toLowerCase();
+        const map = {
+            active: 'Ativo',
+            pending: 'Pendente',
+            suspended: 'Suspenso',
+            disabled: 'Desativado',
+            inactive: 'Inativo',
+        };
+        return map[raw] || this.organization?.statusLabel || this.organization?.status || 'Ativo';
     }
 
     get onboardingState() {
-        return this.organization?.onboarding_completed ? 'Complete' : 'Incomplete';
+        return this.organization?.onboarding_completed ? 'Completo' : 'Incompleto';
     }
 
     get usageRows() {
         const usage = this.model?.usage;
 
         return [
-            { key: 'users_count', label: 'Organization users' },
-            { key: 'drivers_count', label: 'Drivers' },
-            { key: 'customers_count', label: 'Customers' },
-            { key: 'orders_count', label: 'Orders' },
-            { key: 'api_requests_count', label: 'API calls' },
-            { key: 'webhook_callbacks_count', label: 'Webhook callbacks' },
+            { key: 'users_count', label: 'Utilizadores da organização' },
+            { key: 'drivers_count', label: 'Motoristas' },
+            { key: 'customers_count', label: 'Clientes' },
+            { key: 'orders_count', label: 'Encomendas' },
+            { key: 'api_requests_count', label: 'Chamadas à API' },
+            { key: 'webhook_callbacks_count', label: 'Callbacks de webhook' },
         ].map((row) => ({ ...row, value: usage?.[row.key] ?? null }));
     }
 

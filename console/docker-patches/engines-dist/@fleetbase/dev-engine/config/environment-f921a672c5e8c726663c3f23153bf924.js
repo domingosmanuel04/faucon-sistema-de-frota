@@ -1,0 +1,1 @@
+define("@fleetbase/dev-engine/config/environment",function(){return{default:{modulePrefix:"@fleetbase/dev-engine",mountedEngineRoutePrefix:"console.developers","ember-leaflet":{excludeCSS:!0,excludeJS:!0,excludeImages:!0},APP:{}}}})

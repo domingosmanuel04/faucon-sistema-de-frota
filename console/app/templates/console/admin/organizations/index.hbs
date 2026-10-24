@@ -4,7 +4,7 @@
     @title={{t "console.admin.organizations.index.title"}}
     @searchQuery={{this.query}}
     @onSearch={{this.search}}
-    @searchPlaceholder="Search organizations, owners, email or phone"
+    @searchPlaceholder="Pesquisar organizações, proprietários, email ou telefone"
     @searchInputClass="admin-organization-resource-search"
     @actionsWrapperClass="space-x-1"
 >
@@ -36,7 +36,7 @@
             </DropdownButton>
         {{else}}
             <Button
-                @text={{if this.selectedOrganizations.length "Export selected" headerAction.text}}
+                @text={{if this.selectedOrganizations.length "Exportar selecionados" headerAction.text}}
                 @icon={{headerAction.icon}}
                 @iconClass={{headerAction.iconClass}}
                 @onClick={{headerAction.onClick}}
@@ -66,11 +66,11 @@
             "table/empty-state"
             variant="compact"
             icon="building"
-            title="No organizations found"
-            description="Search by organization or owner details, or adjust your filters."
-            filteredTitle="No organizations match your filters"
-            filteredDescription="Adjust the search, filters, or saved view to find another organization."
-            primaryText="Clear search and filters"
+            title="Nenhuma organização encontrada"
+            description="Pesquise por organização ou detalhes do proprietário, ou ajuste os filtros."
+            filteredTitle="Nenhuma organização corresponde aos filtros"
+            filteredDescription="Ajuste a pesquisa, os filtros ou a vista guardada para encontrar outra organização."
+            primaryText="Limpar pesquisa e filtros"
             primaryIcon="filter-circle-xmark"
             primaryAction=this.clearFilters
         }}

@@ -1,4 +1,4 @@
-{{page-title "Notifications"}}
+{{page-title "Notificações"}}
 <Layout::Section::Header @title={{t "common.notifications"}}>
      <Button @type="primary" @size="sm" @icon="save" @text={{t "common.save-changes"}} @onClick={{perform this.saveSettings}} @disabled={{this.saveSettings.isRunning}} @isLoading={{or this.saveSettings.isRunning this.getSettings.isRunning}} />
 </Layout::Section::Header>
@@ -7,16 +7,16 @@
     <div class="container mx-auto h-screen">
         <div class="max-w-3xl my-10 mx-auto space-y-4">
             {{#each-in this.groupedNotifications as |groupName notifications|}}
-                <ContentPanel @title={{concat (smart-humanize groupName) " " (t "console.admin.notifications.notification-settings") }} @open={{true}} @wrapperClass="bordered-classic">
+                <ContentPanel @title={{concat groupName " " (t "console.admin.notifications.notification-settings") }} @open={{true}} @wrapperClass="bordered-classic">
                     {{#each notifications as |notification|}}
-                        <InputGroup @name={{titleize notification.name}} @helpText={{notification.description}}>
+                        <InputGroup @name={{or notification.label notification.name}} @helpText={{notification.description}}>
                             <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                                 <PowerSelectMultiple
                                     @searchEnabled={{true}}
                                     @options={{this.notifiables}}
                                     @selected={{get this.notificationSettings (concat (get-notification-key notification.definition notification.name) ".notifiables")}}
                                     @onChange={{fn this.onSelectNotifiable notification}}
-                                    @placeholder="Select notifiables..."
+                                    @placeholder="Selecionar destinatários..."
                                     @triggerClass="form-select form-input flex-1"
                                     as |notifiable|
                                 >
@@ -28,17 +28,17 @@
                 </ContentPanel>
             {{/each-in}}
 
-            <ContentPanel @title="SMS Notification Settings" @open={{true}} @wrapperClass="bordered-classic">
-                <Toggle @isToggled={{this.company.options.alpha_numeric_sender_id_enabled}} @onToggle={{this.toggleAlphaNumericSenderId}} @label="Enable Alpha-Numeric Sender ID" @wrapperClass="mb-4" />
-                <InputGroup @name="Alpha-Numeric Sender ID" @value={{this.company.options.alpha_numeric_sender_id}} @helpText="Set the custom alphanumeric name that will appear as the sender for all SMS sent by your organization. Up to 11 letters or numbers. Not supported in all countries." @disabled={{not this.company.options.alpha_numeric_sender_id_enabled}} />
+            <ContentPanel @title="Definições de Notificação SMS" @open={{true}} @wrapperClass="bordered-classic">
+                <Toggle @isToggled={{this.company.options.alpha_numeric_sender_id_enabled}} @onToggle={{this.toggleAlphaNumericSenderId}} @label="Ativar ID de remetente alfanumérico" @wrapperClass="mb-4" />
+                <InputGroup @name="ID de remetente alfanumérico" @value={{this.company.options.alpha_numeric_sender_id}} @helpText="Defina o nome alfanumérico personalizado que aparecerá como remetente de todos os SMS enviados pela sua organização. Até 11 letras ou números. Não é suportado em todos os países." @disabled={{not this.company.options.alpha_numeric_sender_id_enabled}} />
                 <div class="space-y-2 mb-3">
                     <InfoBlock>
-                        <p>Alphanumeric Sender IDs allow your organization to replace a traditional phone number with a custom text-based sender name when sending SMS notifications (e.g., Fleetbase, MyStore, DispatchHQ). This can improve brand recognition, increase message trust, and enhance deliverability in regions where numeric senders are restricted by local carriers.</p>
-                        <p>When enabled, Fleetbase will use this sender ID for all outbound SMS messages sent on behalf of your organization, including order updates, verification codes, driver notifications, and other automated alerts. Sender IDs can contain up to 11 characters using letters and numbers.</p>
-                        <p>Some countries require or enforce specific messaging rules, and certain carriers may only support alphanumeric senders. Using a Sender ID can significantly improve message delivery in these regions.</p>
+                        <p>Os IDs de remetente alfanuméricos permitem que a sua organização substitua um número de telefone tradicional por um nome de remetente personalizado ao enviar notificações SMS (ex.: Fleetbase, MyStore, DispatchHQ). Isto pode melhorar o reconhecimento da marca, aumentar a confiança nas mensagens e a entregabilidade em regiões onde remetentes numéricos são restringidos pelas operadoras locais.</p>
+                        <p>Quando ativo, o Fleetbase usará este ID de remetente em todas as mensagens SMS enviadas em nome da sua organização, incluindo atualizações de encomendas, códigos de verificação, notificações a motoristas e outros alertas automáticos. Os IDs de remetente podem ter até 11 caracteres com letras e números.</p>
+                        <p>Alguns países exigem regras específicas de mensagens e certas operadoras só suportam remetentes alfanuméricos. Usar um ID de remetente pode melhorar significativamente a entrega nestas regiões.</p>
                     </InfoBlock>
                     <InfoBlock @type="warning">
-                        <p>Delivery of SMS using Alphanumeric Sender IDs depends on local carrier policies. Some regions may restrict or block numeric senders or require the use of alphanumeric senders for successful delivery. While Fleetbase will attempt to deliver all messages using your configured Sender ID, message delivery cannot be guaranteed in countries with carrier-level filtering or regulatory restrictions. Your organization is responsible for ensuring compliance with local messaging regulations in the countries you send SMS to.</p>
+                        <p>A entrega de SMS com IDs de remetente alfanuméricos depende das políticas das operadoras locais. Algumas regiões podem restringir ou bloquear remetentes numéricos ou exigir remetentes alfanuméricos. Embora o Fleetbase tente entregar todas as mensagens com o ID configurado, a entrega não pode ser garantida em países com filtragem ao nível da operadora ou restrições regulatórias. A sua organização é responsável por garantir o cumprimento das regras locais nos países para onde envia SMS.</p>
                     </InfoBlock>
                 </div>
             </ContentPanel>

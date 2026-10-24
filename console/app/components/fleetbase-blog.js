@@ -7,7 +7,7 @@ import { storageFor } from 'ember-local-storage';
 import { add, format, isPast, isValid } from 'date-fns';
 import { task } from 'ember-concurrency';
 
-export default class FleetbaseBlogComponent extends Component {
+export default class FauconBlogComponent extends Component {
     @storageFor('local-cache') localCache;
     @service fetch;
     @tracked posts = [];

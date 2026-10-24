@@ -16,10 +16,10 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
 
     get tabs() {
         const coreTabs = [
-            { route: 'console.admin.organizations.details.index', label: 'Overview', icon: 'chart-simple', priority: 0 },
-            { route: 'console.admin.organizations.details.users', label: 'Users', icon: 'users', priority: 10 },
-            { route: 'console.admin.organizations.details.activity', label: 'Activity', icon: 'clock-rotate-left', priority: 30 },
-            { route: 'console.admin.organizations.details.settings', label: 'Settings', icon: 'gear', priority: 40 },
+            { route: 'console.admin.organizations.details.index', label: 'Visão geral', icon: 'chart-simple', priority: 0 },
+            { route: 'console.admin.organizations.details.users', label: 'Utilizadores', icon: 'users', priority: 10 },
+            { route: 'console.admin.organizations.details.activity', label: 'Atividade', icon: 'clock-rotate-left', priority: 30 },
+            { route: 'console.admin.organizations.details.settings', label: 'Definições', icon: 'gear', priority: 40 },
         ];
         const registeredTabs = this.visibleRegisteredTabs.map((tab) => ({
             ...tab,
@@ -76,28 +76,28 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
     get actionMenuItems() {
         return [
             {
-                label: 'Impersonate Owner',
+                label: 'Personificar proprietário',
                 icon: 'user-secret',
                 perform: this.impersonateOwner,
                 disabled: !this.ownerId,
             },
             {
-                label: 'Copy Public ID',
+                label: 'Copiar ID público',
                 icon: 'copy',
-                onClick: () => this.copyId(this.organization?.public_id, 'Public ID'),
+                onClick: () => this.copyId(this.organization?.public_id, 'ID público'),
             },
             {
-                label: 'Copy UUID',
+                label: 'Copiar UUID',
                 icon: 'fingerprint',
                 onClick: () => this.copyId(this.organization?.uuid, 'UUID'),
             },
             {
-                label: 'Refresh',
+                label: 'Atualizar',
                 icon: 'refresh',
                 onClick: this.refresh,
             },
             {
-                label: 'Edit Settings',
+                label: 'Editar definições',
                 icon: 'edit',
                 onClick: this.editOrganization,
             },
@@ -118,12 +118,26 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
         return this.organization?.status || 'active';
     }
 
+    get organizationStatusLabel() {
+        const labels = {
+            active: 'Ativo',
+            inactive: 'Inativo',
+            suspended: 'Suspenso',
+        };
+
+        return labels[this.organizationStatus] || this.organizationStatus;
+    }
+
     get onboardingStatus() {
         return this.organization?.onboarding_completed ? 'complete' : 'incomplete';
     }
 
+    get onboardingStatusLabel() {
+        return this.organization?.onboarding_completed ? 'Onboarding concluído' : 'Onboarding incompleto';
+    }
+
     get billingStatus() {
-        return this.organization?.billing_status || 'not configured';
+        return this.organization?.billing_status || 'não configurado';
     }
 
     get owner() {
@@ -187,13 +201,13 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
         }
 
         navigator.clipboard?.writeText(value);
-        this.notifications.success(`${label} copied to clipboard.`);
+        this.notifications.success(`${label} copiado para a área de transferência.`);
     }
 
     @action editOrganization() {
         this.modalsManager.show('modals/edit-organization', {
-            title: 'Edit Organization',
-            acceptButtonText: 'Save Changes',
+            title: 'Editar Organização',
+            acceptButtonText: 'Salvar Alterações',
             acceptButtonIcon: 'save',
             organization: this.organization,
             confirm: async (modal) => {
@@ -201,7 +215,7 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
 
                 try {
                     await this.organization.save();
-                    this.notifications.success('Organization updated.');
+                    this.notifications.success('Organização atualizada.');
                     return this.router.refresh();
                 } catch (error) {
                     this.notifications.serverError(error);
@@ -226,14 +240,14 @@ export default class ConsoleAdminOrganizationsDetailsController extends Controll
 
     @task *impersonateOwner() {
         if (!this.ownerId) {
-            return this.notifications.error('This organization does not have an owner to impersonate.');
+            return this.notifications.error('Esta organização não tem proprietário para personificar.');
         }
 
         try {
             const { token } = yield this.fetch.post('auth/impersonate', { user: this.ownerId });
             yield this.router.transitionTo('console');
             this.session.manuallyAuthenticate(token);
-            this.notifications.info(`Now impersonating ${this.ownerEmail || 'organization owner'}...`);
+            this.notifications.info(`A personificar ${this.ownerEmail || 'proprietário da organização'}...`);
             later(() => window.location.reload(), 600);
         } catch (error) {
             this.notifications.serverError(error);

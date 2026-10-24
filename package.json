@@ -1,0 +1,28 @@
+{
+  "name": "fleetbase",
+  "version": "1.0.0",
+  "description": "<div id=\"hero\">   <p align=\"center\" dir=\"auto\">     <a href=\"https://fleetbase.io\" rel=\"nofollow\">       <img src=\"https://user-images.githubusercontent.com/58805033/191936702-fed04b0f-7966-4041-96d0-95e27bf98248.png\" alt=\"Fleetbase logo\" width=\"500\" height=\"120\" style=\"max-width: 100%;\">     </a>   </p>   <p align=\"center\" dir=\"auto\">     <a href=\"https://trendshift.io/repositories/1160?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-1160\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://trendshift.io/api/badge/repositories/1160\" alt=\"fleetbase%2Ffleetbase | Trendshift\" width=\"250\" height=\"55\"/></a>   </p>   <p align=\"center\" dir=\"auto\">     <a href=\"https://github.com/fleetbase/fleetbase/blob/main/LICENSE.md\"><img src=\"https://img.shields.io/github/license/fleetbase/fleetbase\" alt=\"License\"></a>     <a href=\"https://github.com/fleetbase/fleetbase/releases\"><img src=\"https://img.shields.io/github/v/release/fleetbase/fleetbase\" alt=\"Latest Release\"></a>     <a href=\"https://codecov.io/gh/fleetbase/fleetbase\"><img src=\"https://codecov.io/gh/fleetbase/fleetbase/branch/main/graph/badge.svg\" alt=\"Coverage\"></a>     <a href=\"https://github.com/fleetbase/fleetbase/stargazers\"><img src=\"https://img.shields.io/github/stars/fleetbase/fleetbase?style=social\" alt=\"GitHub Stars\"></a>     <a href=\"https://discord.gg/V7RVWRQ2Wm\"><img src=\"https://img.shields.io/discord/699834923032248430?logo=discord&label=Discord\" alt=\"Discord\"></a>   </p>   <p align=\"center\" dir=\"auto\">     <strong>Open-source logistics and supply chain operating system</strong>     <br>     <a href=\"https://www.fleetbase.io/docs\" rel=\"nofollow\">Documentation</a>     ·     <a href=\"https://www.fleetbase.io/docs/api\" rel=\"nofollow\">API Reference</a>     ·     <a href=\"https://console.fleetbase.io/onboard\" rel=\"nofollow\">Try Fleetbase Cloud</a>     ·     <a href=\"https://tally.so/r/3NBpAW\" rel=\"nofollow\">Book a Demo</a>     ·     <a href=\"https://discord.gg/V7RVWRQ2Wm\" rel=\"nofollow\">Discord</a>   </p>   <hr /> </div>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fleetbase/fleetbase.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fleetbase/fleetbase/issues"
+  },
+  "homepage": "https://github.com/fleetbase/fleetbase#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

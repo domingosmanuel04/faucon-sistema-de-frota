@@ -16,7 +16,7 @@ services:
     # grow past 300 GB locally, so it is switched off.
     command: ["mysqld", "--skip-log-bin"]
     ports:
-      - "3306:3306"
+      - "3309:3306"
     volumes:
       - "./docker/database/:/docker-entrypoint-initdb.d/"
       - "./docker/database/mysql:/var/lib/mysql"

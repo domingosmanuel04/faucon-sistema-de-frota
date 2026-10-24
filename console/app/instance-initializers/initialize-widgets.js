@@ -1,7 +1,5 @@
 import { Widget } from '@fleetbase/ember-core/contracts';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { debug } from '@ember/debug';
-
 /**
  * Register dashboard and widgets for FleetbaseConsole
  * Runs after extensions are loaded
@@ -17,40 +15,15 @@ export function initialize(appInstance) {
     widgetService.registerDashboard('dashboard');
     widgetService.registerDashboard('admin');
     widgetService.registerDashboardForSlot('console.home', 'dashboard', {
-        name: 'Default Dashboard',
+        name: 'Painel padrão',
         extension: 'core',
         priority: 0,
     });
 
     // Wait for all extension to boot
     universe.onBoot(() => {
-        // Create widget definitions
-        const widgets = [
-            new Widget({
-                id: 'fleetbase-blog',
-                name: 'Fleetbase Blog',
-                description: 'Lists latest news and events from the Fleetbase official team.',
-                icon: 'newspaper',
-                component: 'fleetbase-blog',
-                grid_options: { w: 6, h: 13, minW: 6, minH: 9 },
-                // Beside ledger's Recent Financial Activity (150), above the GitHub card;
-                // extensions place their widgets before these with lower `order` values.
-                order: 160,
-                default: true,
-            }),
-            new Widget({
-                id: 'fleetbase-github-card',
-                name: 'Github Card',
-                description: 'Displays current Github stats from the official Fleetbase repo.',
-                icon: faGithub,
-                component: 'github-card',
-                grid_options: { w: 6, h: 6, minW: 5, minH: 6 },
-                // Under the blog, beside ledger's Recent Financial Activity (h 19 = 13 + 6). Six
-                // rows fit the card without scrolling; it stretches to fill them.
-                order: 170,
-                default: true,
-            }),
-        ];
+        // Blog and GitHub promo widgets intentionally omitted from the home dashboard.
+        const widgets = [];
 
         const adminKpiTile = (id, name, description, icon, slug, options = {}) =>
             new Widget({

@@ -10,8 +10,8 @@ export default class ConsoleAdminOrganizationsDetailsSettingsController extends 
 
     @action editOrganization() {
         this.modalsManager.show('modals/edit-organization', {
-            title: 'Edit Organization',
-            acceptButtonText: 'Save Changes',
+            title: 'Editar Organização',
+            acceptButtonText: 'Salvar Alterações',
             acceptButtonIcon: 'save',
             organization: this.model,
             confirm: async (modal) => {
@@ -19,7 +19,7 @@ export default class ConsoleAdminOrganizationsDetailsSettingsController extends 
 
                 try {
                     await this.model.save();
-                    this.notifications.success('Organization updated.');
+                    this.notifications.success('Organização atualizada.');
                     return this.router.refresh();
                 } catch (error) {
                     this.notifications.serverError(error);
@@ -29,16 +29,23 @@ export default class ConsoleAdminOrganizationsDetailsSettingsController extends 
     }
 
     @action setStatus(status) {
+        const statusLabels = {
+            active: 'ativo',
+            inactive: 'inativo',
+            suspended: 'suspenso',
+        };
+        const label = statusLabels[status] || status;
+
         this.modalsManager.confirm({
-            title: 'Update Organization Status',
-            body: `Set this organization status to ${status}?`,
-            acceptButtonText: 'Update Status',
+            title: 'Atualizar Estado da Organização',
+            body: `Definir o estado desta organização como ${label}?`,
+            acceptButtonText: 'Atualizar Estado',
             confirm: async (modal) => {
                 modal.startLoading();
 
                 try {
                     await this.fetch.patch(`companies/${this.model.uuid}/status`, { status });
-                    this.notifications.success('Organization status updated.');
+                    this.notifications.success('Estado da organização atualizado.');
                     return this.router.refresh();
                 } catch (error) {
                     this.notifications.serverError(error);
@@ -49,15 +56,17 @@ export default class ConsoleAdminOrganizationsDetailsSettingsController extends 
 
     @action setOnboarding(completed) {
         this.modalsManager.confirm({
-            title: completed ? 'Mark Onboarding Complete' : 'Mark Onboarding Incomplete',
-            body: completed ? 'Mark this organization onboarding as complete?' : 'Mark this organization onboarding as incomplete?',
-            acceptButtonText: completed ? 'Mark Complete' : 'Mark Incomplete',
+            title: completed ? 'Marcar Onboarding como Concluído' : 'Marcar Onboarding como Incompleto',
+            body: completed
+                ? 'Marcar o onboarding desta organização como concluído?'
+                : 'Marcar o onboarding desta organização como incompleto?',
+            acceptButtonText: completed ? 'Marcar como concluído' : 'Marcar como incompleto',
             confirm: async (modal) => {
                 modal.startLoading();
 
                 try {
                     await this.fetch.patch(`companies/${this.model.uuid}/onboarding`, { completed });
-                    this.notifications.success('Organization onboarding updated.');
+                    this.notifications.success('Onboarding da organização atualizado.');
                     return this.router.refresh();
                 } catch (error) {
                     this.notifications.serverError(error);

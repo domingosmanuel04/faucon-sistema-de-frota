@@ -46,7 +46,7 @@ export default class ConsoleSettingsAuthController extends Controller {
             yield this.fetch.post('companies/auth-settings', {
                 allow_users_change_password: this.allowUsersChangePassword,
             });
-            this.notifications.success('Authentication settings saved.');
+            this.notifications.success('Definições de autenticação guardadas.');
         } catch (error) {
             this.notifications.serverError(error);
         }

@@ -1,0 +1,29 @@
+{
+  "frozen_at": 1792861220,
+  "files": {
+    "assets/vendor-06e3449278af5832aa3f5c4ebf12c1fe.js": {
+      "sha256": "e862547c3ee960a4f75769c2b93d1d6eec21511bcb117d0cb2a65c90d401e6cf",
+      "size": 11626217
+    },
+    "assets/@fleetbase/console-2eb4b2507bff82bcbbbfb7fd639c3469.js": {
+      "sha256": "9e2dfa117f934fc817578d3985985eb1f89c153500a35db900244a1ab042293f",
+      "size": 1969060
+    },
+    "assets/pt-ui-runtime.js": {
+      "sha256": "8592bba3c644689f86fa5f406743fdd0da4f2b782223474ddf055f28def10195",
+      "size": 67664
+    },
+    "assets/faucon-overrides.css": {
+      "sha256": "1dfebaf0bc11b3aa6dd36e07a3b701ebe0e501503cd9381f6bb5bf8aab75c396",
+      "size": 923
+    },
+    "index.html": {
+      "sha256": "85fb3cbadba07f7d4fb279b4aa5cce3e225e2ae2a6d41148ab59ecbb08e11011",
+      "size": 23641
+    },
+    "favicon/favicon.ico": {
+      "sha256": "b443c8ac809395bcbc8ea180156b71776958e5d8725b120ec5d6112c8ee582d0",
+      "size": 634
+    }
+  }
+}

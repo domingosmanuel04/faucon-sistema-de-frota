@@ -59,7 +59,7 @@
             </ContentPanel>
 
             {{#if this.isSystemTwoFaEnabled}}
-                <ContentPanel @title="2FA Settings" @open={{true}} @wrapperClass="bordered-classic">
+                <ContentPanel @title="Definições de 2FA" @open={{true}} @wrapperClass="bordered-classic">
                     <div class="mb-3">
                         {{#if (and this.loadUserTwoFaSettings.isIdle this.loadAuthenticator.isIdle)}}
                             {{! Redrawn when the settings change outside this form }}
@@ -74,14 +74,14 @@
                             {{/each}}
                         {{else}}
                             <div class="flex items-center justify-center p-4">
-                                <Spinner @loadingMessage="Loading User 2FA Settings..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
+                                <Spinner @loadingMessage="A carregar definições de 2FA do utilizador..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
                             </div>
                         {{/if}}
                     </div>
                     <Button
                         @type="primary"
                         @buttonType="submit"
-                        @text="Save 2FA Settings"
+                        @text="Guardar definições de 2FA"
                         @icon="save"
                         @onClick={{this.saveTwoFactorAuthSettings}}
                         @isLoading={{this.saveUserTwoFaSettings.isRunning}}

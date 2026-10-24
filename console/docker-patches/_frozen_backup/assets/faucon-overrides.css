@@ -1,0 +1,23 @@
+
+
+/* hide fleetbase blog+github dashboard widgets */
+.fleetbase-blog,
+.fleetbase-github-card{display:none!important}
+.grid-stack-item:has(.fleetbase-blog),
+.grid-stack-item:has(.fleetbase-github-card),
+.react-grid-item:has(.fleetbase-blog),
+.react-grid-item:has(.fleetbase-github-card),
+[class*="grid"]:has(>.fleetbase-blog),
+[class*="grid"]:has(>.fleetbase-github-card){display:none!important;height:0!important;min-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important}
+
+/* Faucon UI policy: never show stock Fleetbase chrome the user removed */
+.fleetbase-attribution-version,
+.fleetbase-attribution-separator,
+.show-keyboard-shortcuts-user-nav-item,
+.changelog-user-nav-item,
+.docs-user-nav-item,
+.developers-user-nav-item,
+a[href*="discord.gg"],
+a[href*="fleetbase.io/docs"],
+a[href*="github.com/fleetbase/fleetbase"],
+a[href*="storefront-app"]{display:none!important}

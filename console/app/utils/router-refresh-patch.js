@@ -4,7 +4,7 @@
 /* eslint-disable ember/no-private-routing-service */
 import { debug } from '@ember/debug';
 /**
- * Fleetbase Router Refresh Bug Fix Utility
+ * Faucon Router Refresh Bug Fix Utility
  *
  * This utility patches the Ember.js router refresh bug that causes
  * "missing params" errors when transitioning to nested routes with
@@ -13,7 +13,7 @@ import { debug } from '@ember/debug';
  *
  * Bug: https://github.com/emberjs/ember.js/issues/19260
  *
- * @author Fleetbase Pte Ltd <hello@fleetbase.io>
+ * @author Faucon Pte Ltd <hello@fleetbase.io>
  * @version 1.0.0
  */
 
@@ -23,7 +23,7 @@ import { debug } from '@ember/debug';
  */
 export function patchRouterRefresh(application) {
     if (!application || typeof application.lookup !== 'function') {
-        debug('[Fleetbase Router Patch] Invalid application instance provided');
+        debug('[Faucon Router Patch] Invalid application instance provided');
         return;
     }
 
@@ -31,13 +31,13 @@ export function patchRouterRefresh(application) {
         const router = application.lookup('router:main');
 
         if (!router || !router._routerMicrolib) {
-            debug('[Fleetbase Router Patch] Router not found or invalid');
+            debug('[Faucon Router Patch] Router not found or invalid');
             return;
         }
 
         // Check if already patched
         if (router._routerMicrolib._fleetbaseRefreshPatched) {
-            debug('[Fleetbase Router Patch] Already applied, skipping');
+            debug('[Faucon Router Patch] Already applied, skipping');
             return;
         }
 
@@ -89,9 +89,9 @@ export function patchRouterRefresh(application) {
         // Mark as patched
         router._routerMicrolib._fleetbaseRefreshPatched = true;
 
-        debug('[Fleetbase Router Patch] Successfully applied router refresh bug fix');
+        debug('[Faucon Router Patch] Successfully applied router refresh bug fix');
     } catch (error) {
-        debug('[Fleetbase Router Patch] Failed to apply patch: ' + error.message);
+        debug('[Faucon Router Patch] Failed to apply patch: ' + error.message);
     }
 }
 
@@ -101,7 +101,7 @@ export function patchRouterRefresh(application) {
  */
 export function suppressRouterRefreshErrors(application) {
     if (!application) {
-        debug('[Fleetbase Router Patch] Invalid application instance for error suppression');
+        debug('[Faucon Router Patch] Invalid application instance for error suppression');
         return;
     }
 
@@ -110,7 +110,7 @@ export function suppressRouterRefreshErrors(application) {
         window.addEventListener('unhandledrejection', (event) => {
             const error = event.reason;
             if (typeof error?.message === 'string' && error?.message.includes("You didn't provide enough string/numeric parameters to satisfy all of the dynamic segments")) {
-                debug('[Fleetbase Router Patch] Suppressed known Ember route refresh bug: ' + error.message);
+                debug('[Faucon Router Patch] Suppressed known Ember route refresh bug: ' + error.message);
                 event.preventDefault(); // Prevent the error from being logged
             }
         });
@@ -121,7 +121,7 @@ export function suppressRouterRefreshErrors(application) {
 
             window.Ember.onerror = function (error) {
                 if (typeof error?.message === 'string' && error?.message.includes("You didn't provide enough string/numeric parameters to satisfy all of the dynamic segments")) {
-                    debug('[Fleetbase Router Patch] Suppressed known Ember route refresh bug: ' + error.message);
+                    debug('[Faucon Router Patch] Suppressed known Ember route refresh bug: ' + error.message);
                     return; // Suppress the error
                 }
 
@@ -133,9 +133,9 @@ export function suppressRouterRefreshErrors(application) {
             };
         }
 
-        debug('[Fleetbase Router Patch] Error suppression handlers installed');
+        debug('[Faucon Router Patch] Error suppression handlers installed');
     } catch (error) {
-        debug('[Fleetbase Router Patch] Failed to install error suppression: ' + error.message);
+        debug('[Faucon Router Patch] Failed to install error suppression: ' + error.message);
     }
 }
 
@@ -148,7 +148,7 @@ export function suppressRouterRefreshErrors(application) {
 export default function applyRouterFix(application, options = {}) {
     const { suppressErrors = true } = options;
 
-    debug('[Fleetbase Router Patch] Applying Ember router refresh bug fix...');
+    debug('[Faucon Router Patch] Applying Ember router refresh bug fix...');
 
     // Apply the main patch
     patchRouterRefresh(application);
@@ -158,5 +158,5 @@ export default function applyRouterFix(application, options = {}) {
         suppressRouterRefreshErrors(application);
     }
 
-    debug('[Fleetbase Router Patch] Router fix application complete');
+    debug('[Faucon Router Patch] Router fix application complete');
 }

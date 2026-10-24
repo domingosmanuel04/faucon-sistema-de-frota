@@ -136,9 +136,10 @@ export default class ConsoleAdminController extends Controller {
 
     get systemConfigNavigationItem() {
         return {
-            label: 'System Config',
-            description: 'Configure core platform services, mail, storage, queues, sockets, and notifications.',
+            label: 'Configuração do sistema',
+            description: 'Configure serviços da plataforma, email, armazenamento, filas, sockets e notificações.',
             icon: 'sliders',
+            route: 'console.admin.config.services',
             keywords: ['system', 'config', 'configuration', 'services'],
             children: [
                 {

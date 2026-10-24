@@ -5,60 +5,23 @@ import { action } from '@ember/object';
 import { isArray } from '@ember/array';
 
 export default class ConsoleAdminBrandingController extends Controller {
-    /**
-     * Inject the `fetch` service.
-     *
-     * @memberof ConsoleAdminBrandingController
-     */
     @service fetch;
-
-    /**
-     * Inject the `notifications` service.
-     *
-     * @memberof ConsoleAdminBrandingController
-     */
     @service notifications;
-
-    /**
-     * Inject the `theme` service.
-     *
-     * @memberof ConsoleAdminBrandingController
-     */
     @service theme;
 
-    /**
-     * Status of loading process.
-     *
-     * @memberof ConsoleAdminBrandingController
-     */
     @tracked isLoading = false;
+    @tracked themeOptions = [
+        { value: 'light', label: 'Claro' },
+        { value: 'dark', label: 'Escuro' },
+    ];
 
-    /**
-     * Theme options.
-     *
-     * @memberof ConsoleAdminBrandingController
-     */
-    @tracked themeOptions = ['light', 'dark'];
-
-    /**
-     * Set the default theme
-     *
-     * @param {String} theme
-     * @memberof ConsoleAdminBrandingController
-     */
     @action setTheme(theme) {
-        this.model.default_theme = theme;
-        this.theme.setTheme(theme);
+        const value = theme?.value ?? theme;
+        this.model.set('default_theme', value);
+        this.theme.setTheme(value);
+        return this.save();
     }
 
-    /**
-     * Unsets the value of a given key or array of keys on the model.
-     *
-     * @action
-     * @param {string | string[]} key - The key or keys to unset on the model.
-     * @param {*} [newValue=null] - The new value to set for the given key or keys. Defaults to null.
-     * @memberof ConsoleAdminBrandingController
-     */
     @action unset(key, newValue = null) {
         if (isArray(key)) {
             return key.forEach((k) => this.unset(k, undefined));
@@ -67,65 +30,46 @@ export default class ConsoleAdminBrandingController extends Controller {
         this.model.set(key, newValue);
     }
 
-    /**
-     * Unsets the icon properties on the model.
-     *
-     * @action
-     * @returns {void} - No return value.
-     * @memberof ConsoleAdminBrandingController
-     */
     @action unsetIcon() {
         this.unset(['icon_uuid', 'icon_url']);
         this.model.set('icon_url', '/images/icon.png');
+        return this.save();
     }
 
-    /**
-     * Unsets the logo properties on the model.
-     *
-     * @action
-     * @returns {void} - No return value.
-     * @memberof ConsoleAdminBrandingController
-     */
     @action unsetLogo() {
         this.unset(['logo_uuid', 'logo_url']);
         this.model.set('logo_url', '/images/fleetbase-logo-svg.svg');
+        return this.save();
     }
 
-    /**
-     * Save branding settings.
-     *
-     * @return {Promise}
-     * @memberof ConsoleAdminBrandingController
-     */
     @action save() {
         this.isLoading = true;
 
         return this.model
             .save()
-            .then(() => {
-                this.notifications.success('Branding settings saved.');
+            .then((brand) => {
+                this.notifications.success('Identidade visual guardada.');
 
-                // if logo url is null
+                if (brand?.default_theme) {
+                    this.theme.setTheme(brand.default_theme);
+                }
+
                 if (this.model.logo_url === null) {
                     this.model.set('logo_url', '/images/fleetbase-logo-svg.svg');
                 }
 
-                // if icon url is null
                 if (this.model.icon_url === null) {
                     this.model.set('icon_url', '/images/icon.png');
                 }
+            })
+            .catch((error) => {
+                if (typeof this.notifications.serverError === 'function') { this.notifications.serverError(error); } else { this.notifications.error('Não foi possível guardar a identidade visual.'); }
             })
             .finally(() => {
                 this.isLoading = false;
             });
     }
 
-    /**
-     * Handle upload of new console icon
-     *
-     * @param {UploadFile} file
-     * @memberof ConsoleAccountIndexController
-     */
     @action uploadIcon(file) {
         this.isLoading = true;
 
@@ -136,19 +80,17 @@ export default class ConsoleAdminBrandingController extends Controller {
                 type: `system`,
             },
             (uploadedFile) => {
-                this.model.icon_uuid = uploadedFile.id;
-                this.model.icon_url = uploadedFile.url;
+                this.model.set('icon_uuid', uploadedFile.id);
+                this.model.set('icon_url', uploadedFile.url);
+                this.isLoading = false;
+                return this.save();
+            },
+            () => {
                 this.isLoading = false;
             }
         );
     }
 
-    /**
-     * Handle upload of new console logo
-     *
-     * @param {UploadFile} file
-     * @memberof ConsoleAccountIndexController
-     */
     @action uploadLogo(file) {
         this.isLoading = true;
 
@@ -159,8 +101,12 @@ export default class ConsoleAdminBrandingController extends Controller {
                 type: `system`,
             },
             (uploadedFile) => {
-                this.model.logo_uuid = uploadedFile.id;
-                this.model.logo_url = uploadedFile.url;
+                this.model.set('logo_uuid', uploadedFile.id);
+                this.model.set('logo_url', uploadedFile.url);
+                this.isLoading = false;
+                return this.save();
+            },
+            () => {
                 this.isLoading = false;
             }
         );

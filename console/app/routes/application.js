@@ -115,7 +115,9 @@ export default class ApplicationRoute extends Route {
      * the `setLocale` method of the `intl` service with the retrieved locale.
      */
     initializeLocale() {
-        const locale = this.currentUser.getOption('locale', 'en-US');
-        this.intl.setLocale([locale]);
+        // Built console bundles ship `pt-br` (not `pt-pt`). Always use pt-br so
+        // ember-intl resolves the Portuguese translation pack.
+        this.currentUser.setOption('locale', 'pt-br');
+        this.intl.setLocale(['pt-br', 'en-us']);
     }
 }

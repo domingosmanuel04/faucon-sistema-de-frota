@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-color" content="#000000" />
+    <title>Faucon Console</title>
+
+    <meta name="@fleetbase/ai-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/ai-engine%22%2C%22environment%22%3A%22production%22%7D" />
+<meta name="@fleetbase/customer-portal-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/customer-portal-engine%22%2C%22mountedEngineRoutePrefix%22%3A%22customer-portal%22%2C%22environment%22%3A%22production%22%7D" />
+<meta name="@fleetbase/dev-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/dev-engine%22%2C%22environment%22%3A%22production%22%2C%22mountedEngineRoutePrefix%22%3A%22console.developers%22%2C%22ember-leaflet%22%3A%7B%22excludeCSS%22%3Atrue%2C%22excludeJS%22%3Atrue%2C%22excludeImages%22%3Atrue%7D%2C%22APP%22%3A%7B%7D%7D" />
+<meta name="@fleetbase/fleetops-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/fleetops-engine%22%2C%22environment%22%3A%22production%22%2C%22mountedEngineRoutePrefix%22%3A%22console.fleet-ops%22%2C%22defaultValues%22%3A%7B%22driverImage%22%3A%22https%3A//s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png%22%2C%22userImage%22%3A%22https%3A//s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png%22%2C%22contactImage%22%3A%22https%3A//s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png%22%2C%22vendorImage%22%3A%22https%3A//s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png%22%2C%22vehicleImage%22%3A%22https%3A//s3.ap-southeast-1.amazonaws.com/flb-assets/static/vehicle-placeholder.png%22%2C%22entityImage%22%3A%22https%3A//flb-assets.s3-ap-southeast-1.amazonaws.com/static/parcels/medium.png%22%2C%22vehicleAvatar%22%3A%22https%3A//flb-assets.s3-ap-southeast-1.amazonaws.com/static/vehicle-icons/mini_bus.svg%22%2C%22driverAvatar%22%3A%22https%3A//flb-assets.s3-ap-southeast-1.amazonaws.com/static/driver-icons/moto-driver.png%22%2C%22placeAvatar%22%3A%22https%3A//flb-assets.s3-ap-southeast-1.amazonaws.com/static/place-icons/basic-building.png%22%7D%2C%22APP%22%3A%7B%7D%7D" />
+<meta name="@fleetbase/iam-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/iam-engine%22%2C%22environment%22%3A%22production%22%2C%22mountedEngineRoutePrefix%22%3A%22console.iam%22%7D" />
+<meta name="@fleetbase/ledger-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/ledger-engine%22%2C%22environment%22%3A%22production%22%2C%22ember-leaflet%22%3A%7B%22excludeCSS%22%3Atrue%2C%22excludeJS%22%3Atrue%2C%22excludeImages%22%3Atrue%7D%7D" />
+<meta name="@fleetbase/registry-bridge-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/registry-bridge-engine%22%2C%22environment%22%3A%22production%22%2C%22mountedEngineRoutePrefix%22%3A%22console.extensions.%22%2C%22stripe%22%3A%7B%22publishableKey%22%3Anull%7D%2C%22registry%22%3A%7B%22selfHosted%22%3Afalse%7D%2C%22APP%22%3A%7B%7D%7D" />
+<meta name="@fleetbase/storefront-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/storefront-engine%22%2C%22environment%22%3A%22production%22%2C%22mountedEngineRoutePrefix%22%3A%22console.storefront%22%2C%22defaultValues%22%3A%7B%22categoryImage%22%3A%22https%3A//flb-assets.s3.ap-southeast-1.amazonaws.com/images/fallback-placeholder-1.png%22%2C%22placeholderImage%22%3A%22https%3A//flb-assets.s3.ap-southeast-1.amazonaws.com/images/fallback-placeholder-2.png%22%7D%2C%22ember-leaflet%22%3A%7B%22excludeCSS%22%3Atrue%2C%22excludeJS%22%3Atrue%2C%22excludeImages%22%3Atrue%7D%2C%22APP%22%3A%7B%7D%7D" />
+<meta name="@fleetbase/valhalla-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/valhalla-engine%22%2C%22environment%22%3A%22production%22%7D" />
+<meta name="@fleetbase/vroom-engine/config/environment" content="%7B%22modulePrefix%22%3A%22@fleetbase/vroom-engine%22%2C%22environment%22%3A%22production%22%2C%22vroom%22%3A%7B%22apiKey%22%3Anull%7D%7D" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico?v=faucon-brand3" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=faucon-brand3" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=faucon-brand3" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=faucon-brand3" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=faucon-brand3" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png?v=faucon-brand3" />
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon/android-chrome-256x256.png?v=faucon-brand3" />
+    <link rel="manifest" href="/favicon/site.webmanifest?v=faucon-brand3" />
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=faucon-brand3" color="#009dff" />
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+    <link integrity="" rel="stylesheet" href="/assets/vendor-7d6f392f1e306ccbf0e8ef6f3afd954a.css">
+<link rel="stylesheet" href="/assets/chunk.68882.61c6aedc432fcdeeb435.css" integrity="sha256-MbM6ooFu7N6AWau36xWP6Bnn/kIQtUpubblKiger1ZI= sha512-tpE6Y/ihOr6J4mlTwsr1pD42dHxXVVTq+iDgTEwHAZKKdTRb8WfQtThuK9r5YAfbzwuCe3rmHRKIPcmjDx++eQ==" />
+    <link integrity="" rel="stylesheet" href="/assets/@fleetbase/console-a0d590b8dcabdf4fc9b92a8e814c56a7.css" integrity="sha256-91JfjbdwHMaDfj6vRXiTu3FeLKtxoa7ZoehjycTqv58= sha512-EJ2YqcVdfYiRRyGO2J87TQRA5Swm3X1MQIMELvMbnn1EonTRQZUkKV4TuC4yHlwnbo+xvkj86fnGu8Ze4pI06A==">
+
+    <meta name="@fleetbase/console/config/asset-manifest" content="%7B%22bundles%22%3A%7B%22@fleetbase/ai-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/assets/engine-080a7d61fcbb2ae807f94661524fba13.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/assets/engine-9d5748a85986ad7aae17726839be1c64.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ai-engine/config/environment-eb967bb06ec96fd213c96bc93c88e94a.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/customer-portal-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/engine-136a720e0ec5e3f640465ca5656ef4db.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/engine-8ecebf4681dd2ebd5adf7104063cbadc.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/engine-vendor-82221ccae03988d594dc1bc20809c2b8.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/engine-vendor-b2a31571f9ae43ece3e68abeabd1d10f.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/customer-portal-engine/config/environment-e5cb9ca5427b3f4718a33d1bcb1371b1.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/dev-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/assets/engine-3bdc5346756f1819a2cf177ab50a3742.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/assets/engine-7cc34aafe66442d1fdb44297aa4cc59b.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/dev-engine/config/environment-f921a672c5e8c726663c3f23153bf924.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/fleetops-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/engine-c35e8daab8e8bcadf5c0c8249ce1fb4e.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/engine-d256c1b0b8b46e3ebbd0c4cb0afdff8d.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/engine-vendor-71cb7692ee2365b8a0fd387a128e2bd9.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/engine-vendor-9b3c68621a951890e4315ef5ca3aef2c.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/fleetops-engine/config/environment-38c5a1182a6e4b2543bd4e81bdb57b96.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/iam-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/assets/engine-5fdcdd892e283dfc9c7e6f5534e0e24a.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/assets/engine-6218e163b55529e90f9d536325c9bdfe.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/iam-engine/config/environment-276045afcbbda0826ebbbe3ea8b28b3f.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/ledger-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/engine-1b288da0bdfaa1897959b23ea029a8df.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/engine-e1119fa857b84ff03e9a04fce08dde79.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/engine-vendor-3a766d4ed2897e097ecd185c62804ea7.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/engine-vendor-69420eace551f6ea91e4215bde88243a.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/ledger-engine/config/environment-aaed7ab8a7aaa325412198849df8170f.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/registry-bridge-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/assets/engine-35fec5fc31d1f6adfb63ff39ee065b06.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/assets/engine-6464337c413126bb539a7b8978a702bf.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/registry-bridge-engine/config/environment-77f41f07195fce14e85c61606d1ff9ce.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/storefront-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/assets/engine-a11578249de57ef37ed784b5cba622da.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/assets/engine-ec232a16ae2fc65799db6741d3eab93d.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/storefront-engine/config/environment-77c54b5766f678e5b0225a2e546515f4.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/valhalla-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/valhalla-engine/assets/engine-772dbf36112c16ea1e28677c84e8d163.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/valhalla-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/valhalla-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/valhalla-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/valhalla-engine/config/environment-94cbddb12be78e05e7da72d3cb3cadb8.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22@fleetbase/vroom-engine%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/@fleetbase/vroom-engine/assets/engine-e76f2bed77d82a9d78a777e743f6c4f3.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/vroom-engine/assets/engine-vendor-5ce5dd1804a67bbffd4ffe1099298a20.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/vroom-engine/assets/libphonenumber/utils-f19a2920e62e963c46cc986e1506a3fb.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/vroom-engine/assets/socketcluster-client.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/@fleetbase/vroom-engine/config/environment-13fa478a9897afc2c6b3c235d6d57885.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%2C%22leaflet%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.contextmenu.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.contextmenu.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.contextmenu.min.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.contextmenu.min.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.draw-src.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.draw-src.js%22%2C%22type%22%3A%22js%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.draw.css%22%2C%22type%22%3A%22css%22%7D%2C%7B%22uri%22%3A%22/engines-dist/leaflet/leaflet.draw.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%7D%7D" />
+  
+<style id="fleetbase-pt-ui-fixes">
+  /* Avoid sticky row-actions overlapping previous column values */
+  .ember-table .et-td.is-sticky.sticky-right,
+  .ember-table td.is-sticky.sticky-right {
+    background-color: inherit;
+    box-shadow: -8px 0 8px -8px rgba(0,0,0,.35);
+    z-index: 3 !important;
+  }
+  .ember-table .et-th.is-sticky.sticky-right,
+  .ember-table th.is-sticky.sticky-right {
+    z-index: 4 !important;
+  }
+  /* Stop column customizer / filter labels being clipped by ellipsis */
+  .column-configurator label,
+  .next-column-configurator label,
+  .filter-picker label,
+  .filters-picker label,
+  .admin-filter-date label,
+  .input-group > label {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    max-width: none !important;
+  }
+  .ember-table .et-th .et-header-content,
+  .ember-table th {
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  /* Keep sticky actions from covering previous column (Criado em) */
+  .ember-table .et-td.is-sticky.sticky-right,
+  .ember-table td.is-sticky.sticky-right {
+    min-width: 88px !important;
+    width: 88px !important;
+    padding-left: 12px !important;
+  }
+  .ember-table .et-td.is-sticky.sticky-right .ember-table-cell-content,
+  .ember-table td.is-sticky.sticky-right .ember-table-cell-content {
+    overflow: visible !important;
+  }
+  .ember-table .et-tr .et-td:not(.is-sticky) {
+    padding-right: 8px;
+  }
+
+  /* Hide Fleetbase Blog + GitHub promo widgets on home dashboard */
+  .fleetbase-blog,
+  .fleetbase-github-card {
+    display: none !important;
+  }
+  .grid-stack-item:has(.fleetbase-blog),
+  .grid-stack-item:has(.fleetbase-github-card),
+  .react-grid-item:has(.fleetbase-blog),
+  .react-grid-item:has(.fleetbase-github-card),
+  [data-gs-id="fleetbase-blog"],
+  [data-gs-id="fleetbase-github-card"],
+  [data-widget-id="fleetbase-blog"],
+  [data-widget-id="fleetbase-github-card"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+
+  /* hide storefront Abrir App */
+  a[href="https://github.com/fleetbase/storefront-app"],
+  a[href*="github.com/fleetbase/storefront-app"] {
+    display: none !important;
+  }
+
+  /* Avisos legais: sem botões externos de licenciamento */
+  .fleetbase-legal-notice-links,
+  .fleetbase-legal-notice-modal .fleetbase-legal-notice-links {
+    display: none !important;
+  }
+
+</style>
+
+  </head>
+  <body>
+    
+    <div id="boot-loader" class="overloader">
+      <div class="loader-container">
+        <span class="fleetbase-loader" width="16" height="16"></span>
+        <div class="loading-message">A iniciar...</div>
+      </div>
+    </div>
+        <script>
+(function(){
+  /* Normalize any Portuguese variant to pt-br (ember-intl only ships pt-br) */
+  function normalizePtLocale(){
+    try {
+      var key='@fleetbase/storage:user-options';
+      var raw=localStorage.getItem(key);
+      var opts=raw?JSON.parse(raw):{};
+      var changed=false;
+      function norm(v){
+        if(!v) return v;
+        var s=String(v).toLowerCase();
+        if(s==='pt'||s==='pt-pt'||s==='pt_pt'||s.indexOf('pt-')===0||s.indexOf('pt_')===0){
+          if(s!=='pt-br'){ changed=true; return 'pt-br'; }
+        }
+        return v;
+      }
+      Object.keys(opts).forEach(function(k){
+        if(k==='locale' || String(k).endsWith(':locale')){
+          var n=norm(opts[k]);
+          if(n!==opts[k]) opts[k]=n;
+        }
+      });
+      if(!opts.locale){ opts.locale='pt-br'; changed=true; }
+      if(changed || !raw) localStorage.setItem(key, JSON.stringify(opts));
+    } catch(e){}
+  }
+  normalizePtLocale();
+})();
+</script>
+<script src="/assets/pt-ui-runtime.js?v=1792885716" integrity="sha256-XHVqpeVzJ+dnyMEXoxfzT8fxGm6Ffl1MYWTpYW+7dfk= sha512-4t9wtzk91b2hvIcpuTvIy90KQ8uYLlTLO6knebx++QO9TRoTHFtlVRiyH92wI0p+RUXueWaDLsNYv5cOWtQdxg==" ></script>
+
+
+<script src="/assets/vendor-06e3449278af5832aa3f5c4ebf12c1fe.js?v=1792885716" integrity="sha256-21Av54gchHx0IsSoNaPWSZ4bZH3unAMUzodT6JK6/qw= sha512-0LA1sG9dajObdkSWK9lqiBdkPDdRQuskW4cIirztvSJU/Q9Ul+fFfGZoQ1cIBS8P6ARYE99+6udKXPHgo5jFQQ==" ></script>
+<script src="/assets/chunk.68882.61c6aedc432fcdeeb435.js" integrity="sha256-H4cv2cE2wxJhMzbeIreed7DHPV6QC+mJ42NkFGSWW0U= sha512-S4XoXvd5q5YR0tvUHi08w/mc7dZireCeWabM5foGRBj6sQU73T2b3ZpVw8WZ4fLFvU+sBbsweDLkf5Fx1Wc2FA==" ></script>
+<script src="/assets/chunk.33524.d3c96719e7a4322eea5b.js" integrity="sha256-VmtXUxyXmDLJ6bfimKYH9XrY/r69mM46Gnd8FLCaic8= sha512-LB1q+Lggx0xTXXuoNYn9BCtHxmABvKZ1xhnh1vYaGbS/T2V92g88iH6nE/w1jsgQsKjaRlqojbx5LadBa3xc4w==" ></script>
+    <script src="/assets/@fleetbase/console-2eb4b2507bff82bcbbbfb7fd639c3469.js?v=1792885716" integrity="sha256-w3cuG9hiU0F2jNgnI9z1tJ+yWP5Pym6x1EPdn+f6ZzU= sha512-ZTOAroCZtH5g0fhO+HROpSYrrCx4gwgtpX2SyfoCRi11cy8714hBjUDc6Vicn2W8lA+mm78Hx91iRekKWBFqjg==" ></script>
+
+    
+  </body>
+</html>

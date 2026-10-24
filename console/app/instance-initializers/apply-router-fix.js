@@ -4,7 +4,7 @@ import { debug } from '@ember/debug';
 /**
  * Apply Router Fix Instance Initializer
  *
- * Applies the Fleetbase router refresh bug fix patch.
+ * Applies the Faucon router refresh bug fix patch.
  * This patches the Ember router to handle dynamic segments correctly
  * when refreshing routes with query parameters.
  *

@@ -1,10 +1,10 @@
-{{page-title "TwoFa"}}
-<Layout::Section::Header @title="2FA" />
+{{page-title "Dois fatores"}}
+<Layout::Section::Header @title="Dois fatores" />
 
 <Layout::Section::Body class="overflow-y-scroll h-full">
     <div class="container mx-auto h-screen">
         <div class="max-w-3xl my-10 mx-auto space-y-6">
-            <ContentPanel @title="2FA Settings" @open={{true}} @wrapperClass="bordered-classic">
+            <ContentPanel @title="Definições de dois fatores" @open={{true}} @wrapperClass="bordered-classic">
                 <div class="mb-3">
                     {{#if this.loadCompanyTwoFaSettings.isIdle}}
                         <TwoFaSettings
@@ -18,14 +18,14 @@
                         />
                     {{else}}
                         <div class="flex items-center justify-center p-4">
-                            <Spinner @loadingMessage="Loading User 2FA Settings..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
+                            <Spinner @loadingMessage="A carregar definições de 2FA..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
                         </div>
                     {{/if}}
                 </div>
                 <Button
                     @type="primary"
                     @buttonType="submit"
-                    @text="Save 2FA Settings"
+                    @text="Guardar definições de 2FA"
                     @icon="save"
                     @onClick={{this.saveTwoFactor}}
                     @isLoading={{this.enforceTwoFaForCompanyUsers.isRunning}}

@@ -108,7 +108,7 @@ export default class ConsoleSettingsNotificationsController extends Controller {
         try {
             yield this.fetch.post('notifications/save-settings', { notificationSettings: notificationSettings ?? {} });
             yield this.saveCompanyOptions.perform();
-            this.notifications.success('Notification settings successfully saved.');
+            this.notifications.success('Definições de notificação guardadas com sucesso.');
         } catch (error) {
             this.notifications.serverError(error);
         }

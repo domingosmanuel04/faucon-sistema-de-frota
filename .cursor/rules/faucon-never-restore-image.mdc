@@ -1,0 +1,29 @@
+---
+description: Faucon — NUNCA restaurar assets da imagem Docker Fleetbase (PT/menu/ícone)
+alwaysApply: true
+---
+
+# Faucon: patches locais são a fonte da verdade
+
+Este projeto rebrand Faucon. A UI em português, o menu limpo, o favicon Makira e o CSS vivem em `console/docker-patches/` e são montados via `docker-compose.override.yml`.
+
+## PROIBIDO (hard rule)
+
+- Copiar / restaurar / sobrescrever qualquer ficheiro de `console/docker-patches/` a partir da imagem Docker `fleetbase/fleetbase-console` (ou `docker create` / `docker cp` / extrair layers da imagem).
+- “Consertar” JS corrompido voltando ao conteúdo original da imagem.
+- Apagar ou desmontar os volumes do `docker-compose.override.yml` que apontam para `console/docker-patches/`.
+
+Isto já apagou traduções e itens de menu que o utilizador pediu para remover. **Não voltar a fazer.**
+
+## Se um asset partir
+
+1. Restaurar de `console/docker-patches/_frozen_backup/` (ou git), **nunca** da imagem.
+2. Corrigir o patch localmente.
+3. Correr `python3 console/docker-patches/verify_patches.py` para validar.
+
+## Camadas que devem permanecer
+
+- `assets/pt-ui-runtime.js` — traduções residuais + política de menu
+- `assets/faucon-overrides.css` + CSS em `index.html`
+- `favicon/` e mount de `/favicon.ico`
+- Mounts em `docker-compose.override.yml`

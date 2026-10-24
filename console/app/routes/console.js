@@ -10,6 +10,7 @@ export default class ConsoleRoute extends Route {
     @service session;
     @service router;
     @service currentUser;
+    @service theme;
     @service intl;
 
     /**
@@ -38,6 +39,12 @@ export default class ConsoleRoute extends Route {
      */
     async afterModel(model, transition) {
         this.hookService.execute('console:after-model', this.session, this.router, model, transition);
+        if (model?.default_theme) {
+            this.theme.initialTheme = model.default_theme;
+            // Apply console brand theme so Identidade Visual changes take effect for everyone.
+            this.theme.applyTheme(model.default_theme, { persist: false });
+            this.currentUser.setOption('theme', model.default_theme);
+        }
         removeBootLoader();
     }
 

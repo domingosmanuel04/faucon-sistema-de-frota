@@ -1,30 +1,30 @@
-{{page-title "Authentication"}}
-<Layout::Section::Header @title="Authentication" />
+{{page-title "Autenticação"}}
+<Layout::Section::Header @title="Autenticação" />
 
 <Layout::Section::Body class="overflow-y-scroll h-full">
     <div class="container mx-auto h-screen">
         <div class="max-w-3xl my-10 mx-auto space-y-6">
-            <ContentPanel @title="Passwords" @open={{true}} @wrapperClass="bordered-classic">
+            <ContentPanel @title="Palavras-passe" @open={{true}} @wrapperClass="bordered-classic">
                 {{#if this.loadAuthSettings.isIdle}}
                     <div class="flex items-center space-x-4">
-                        <label class="text-base font-medium">Allow users to change their own password</label>
+                        <label class="text-base font-medium">Permitir que os utilizadores alterem a própria palavra-passe</label>
                         <Toggle @isToggled={{this.allowUsersChangePassword}} @onToggle={{this.onAllowUsersChangePasswordToggled}} />
                     </div>
                     <p class="text-sm text-gray-700 dark:text-gray-300 mt-3">
-                        When this is off, only administrators and users whose role or policy grants the
+                        Quando isto estiver desligado, apenas administradores e utilizadores cuja função ou política conceda a permissão
                         <code>iam change-password</code>
-                        permission can change their own password. Invited users can always set their first password.
+                        podem alterar a própria palavra-passe. Utilizadores convidados podem sempre definir a primeira palavra-passe.
                     </p>
                 {{else}}
                     <div class="flex items-center justify-center p-4">
-                        <Spinner @loadingMessage="Loading authentication settings..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
+                        <Spinner @loadingMessage="A carregar definições de autenticação..." @wrapperClass="flex flex-row" @iconClass="mr-2" />
                     </div>
                 {{/if}}
                 <div class="mt-4">
                     <Button
                         @type="primary"
                         @buttonType="submit"
-                        @text="Save Authentication Settings"
+                        @text="Guardar definições de autenticação"
                         @icon="save"
                         @onClick={{perform this.saveAuthSettings}}
                         @isLoading={{this.saveAuthSettings.isRunning}}

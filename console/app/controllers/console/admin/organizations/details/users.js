@@ -74,21 +74,23 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
             sortable: true,
         },
         {
-            label: 'Two-factor authentication',
+            label: 'Autenticação de dois fatores',
             valuePath: 'two_factor_enabled',
             cellComponent: 'admin/table/cell/two-factor',
             resizable: true,
         },
         {
-            label: 'Linked sign-in providers',
+            label: 'Fornecedores de início de sessão',
             valuePath: 'oauth_providers',
             cellComponent: 'admin/table/cell/oauth-providers',
             resizable: true,
         },
         {
-            label: 'Last sign-in',
+            label: 'Último início de sessão',
             valuePath: 'lastLogin',
             resizable: true,
+            width: '180px',
+            cellClassNames: 'whitespace-nowrap pr-10',
         },
         {
             label: '',
@@ -96,18 +98,18 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
             ddButtonText: false,
             ddButtonIcon: 'ellipsis-h',
             ddButtonIconPrefix: 'fas',
-            ddMenuLabel: 'User Actions',
+            ddMenuLabel: 'Ações do utilizador',
             cellClassNames: 'overflow-visible',
             wrapperClass: 'flex items-center justify-end mx-2',
-            width: '9%',
+            width: 88,
             actions: [
                 {
-                    label: 'Impersonate',
+                    label: 'Personificar',
                     icon: 'user-secret',
                     fn: this.impersonateUser,
                 },
                 {
-                    label: 'Change Password',
+                    label: 'Alterar palavra-passe',
                     icon: 'lock-open',
                     fn: this.changeUserPassword,
                 },
@@ -115,27 +117,27 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
                     separator: true,
                 },
                 {
-                    label: 'Verify',
+                    label: 'Verificar',
                     icon: 'circle-check',
                     fn: this.verifyUser,
                 },
                 {
-                    label: 'Activate',
+                    label: 'Ativar',
                     icon: 'user-check',
                     fn: this.activateUser,
                 },
                 {
-                    label: 'Deactivate',
+                    label: 'Desativar',
                     icon: 'user-slash',
                     fn: this.deactivateUser,
                 },
                 {
-                    label: 'Transfer Ownership',
+                    label: 'Transferir propriedade',
                     icon: 'crown',
                     fn: this.transferOwnership,
                 },
                 {
-                    label: 'Remove from Organization',
+                    label: 'Remover da organização',
                     icon: 'user-xmark',
                     class: 'text-red-600',
                     fn: this.removeUser,
@@ -154,7 +156,7 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
             const { token } = await this.fetch.post('auth/impersonate', { user: user.id });
             await this.router.transitionTo('console');
             this.session.manuallyAuthenticate(token);
-            this.notifications.info(`Now impersonating ${user.email}...`);
+            this.notifications.info(`A personificar ${user.email}...`);
             later(() => window.location.reload(), 600);
         } catch (error) {
             this.notifications.serverError(error);
@@ -169,29 +171,35 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
     }
 
     @action async verifyUser(user) {
-        return this.runUserLifecycleAction(user, 'verify', 'User verified.');
+        return this.runUserLifecycleAction(user, 'verify', 'Utilizador verificado.');
     }
 
     @action async activateUser(user) {
-        return this.runUserLifecycleAction(user, 'activate', 'User activated.');
+        return this.runUserLifecycleAction(user, 'activate', 'Utilizador ativado.');
     }
 
     @action async deactivateUser(user) {
-        return this.confirmUserLifecycleAction(user, 'Deactivate User', `Deactivate ${user.name || user.email} for this organization?`, 'deactivate', 'User deactivated.');
+        return this.confirmUserLifecycleAction(
+            user,
+            'Desativar utilizador',
+            `Desativar ${user.name || user.email} nesta organização?`,
+            'deactivate',
+            'Utilizador desativado.'
+        );
     }
 
     @action transferOwnership(user) {
         this.modalsManager.confirm({
-            title: 'Transfer Ownership',
-            body: `Transfer organization ownership to ${user.name || user.email}?`,
-            acceptButtonText: 'Transfer Ownership',
+            title: 'Transferir propriedade',
+            body: `Transferir a propriedade da organização para ${user.name || user.email}?`,
+            acceptButtonText: 'Transferir propriedade',
             acceptButtonIcon: 'crown',
             confirm: async (modal) => {
                 modal.startLoading();
 
                 try {
                     await this.fetch.post(`companies/${this.company.uuid}/transfer-ownership`, { newOwner: this.userIdentifier(user) });
-                    this.notifications.success('Organization ownership transferred.');
+                    this.notifications.success('Propriedade da organização transferida.');
                     return this.router.refresh();
                 } catch (error) {
                     this.notifications.serverError(error);
@@ -201,9 +209,16 @@ export default class ConsoleAdminOrganizationsDetailsUsersController extends Con
     }
 
     @action removeUser(user) {
-        return this.confirmUserLifecycleAction(user, 'Remove User', `Remove ${user.name || user.email} from this organization?`, null, 'User removed.', async () => {
-            await this.fetch.delete(`companies/${this.company.uuid}/users/${this.userIdentifier(user)}`);
-        });
+        return this.confirmUserLifecycleAction(
+            user,
+            'Remover utilizador',
+            `Remover ${user.name || user.email} desta organização?`,
+            null,
+            'Utilizador removido.',
+            async () => {
+                await this.fetch.delete(`companies/${this.company.uuid}/users/${this.userIdentifier(user)}`);
+            }
+        );
     }
 
     @action search(event) {

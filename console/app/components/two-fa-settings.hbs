@@ -1,5 +1,5 @@
 <div class="flex items-center space-x-4">
-    <label class="text-base font-medium">Enable Two-Factor Authentication</label>
+    <label class="text-base font-medium">Ativar autenticação de dois fatores</label>
     <Toggle @isToggled={{this.isTwoFaEnabled}} @onToggle={{this.onTwoFaToggled}} />
 </div>
 
@@ -7,12 +7,12 @@
     <div class="mt-6">
         {{#if this.showEnforceOption}}
             <div class="flex items-center space-x-4 mb-6">
-                <label class="text-base font-medium">Require Users to Set-Up 2FA</label>
+                <label class="text-base font-medium">Exigir que os utilizadores configurem o 2FA</label>
                 <Toggle @isToggled={{this.isTwoFaEnforced}} @onToggle={{this.onTwoFaEnforcedToggled}} />
             </div>
         {{/if}}
         {{#if this.showMethodSelection}}
-            <label class="text-base font-medium">Choose an authentication method</label>
+            <label class="text-base font-medium">Escolha um método de autenticação</label>
             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">In addition to your username and password, you'll have to enter a code (delivered via app or SMS) to sign in to your account</p>
             {{#each @twoFaMethods as |method|}}
                 <div class="border rounded-lg px-4 py-3 mt-2 transition duration-300 {{if (eq this.selectedTwoFaMethod method.key) 'border-blue-500' 'border-gray-200 dark:border-gray-700'}}">
@@ -27,10 +27,10 @@
                     <label for="{{method.name}}">
                         {{method.name}}
                         {{#if method.recommended}}
-                            <span class="bg-blue-500 rounded-xl text-white px-2 py-1 ml-2 text-xs font-semibold">Recommended</span>
+                            <span class="bg-blue-500 rounded-xl text-white px-2 py-1 ml-2 text-xs font-semibold">Recomendado</span>
                         {{/if}}
                         {{#if method.requiresSetup}}
-                            <span class="bg-gray-200 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-100 px-2 py-1 ml-2 text-xs font-semibold">Needs setup</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-100 px-2 py-1 ml-2 text-xs font-semibold">Requer configuração</span>
                         {{/if}}
                         <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{method.description}}</p>
                     </label>

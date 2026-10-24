@@ -35,7 +35,7 @@ export default class OauthService extends Service {
 
     /**
      * A registration intent handed back by the exchange when the provider identity
-     * is not linked to any Fleetbase account.
+     * is not linked to any Faucon account.
      *
      * Deliberately in memory only. It is a bearer credential, and it is single-use
      * and short-lived, so persisting it would add real risk to buy very little —

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documentação — Faucon</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png?v=faucon-brand3" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #121a2b;
+      --text: #e8eefc;
+      --muted: #9aa8c7;
+      --accent: #3b9eff;
+      --accent2: #ff7a29;
+      --border: #243149;
+      --code: #0a101b;
+      --link: #7ec2ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(59,158,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(255,122,41,.12), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .85rem 1.25rem;
+      background: rgba(11,18,32,.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex; align-items: center; gap: .75rem; font-weight: 700; letter-spacing: .02em;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .topbar a.back {
+      color: var(--text); text-decoration: none; border: 1px solid var(--border);
+      padding: .45rem .85rem; border-radius: 8px; background: var(--panel); font-size: .9rem;
+    }
+    .topbar a.back:hover { border-color: var(--accent); }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 1.5rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 4rem;
+    }
+    nav.toc {
+      position: sticky; top: 70px; align-self: start;
+      max-height: calc(100vh - 90px); overflow: auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    nav.toc h4 { margin: 0 0 .75rem; font-size: .8rem; text-transform: uppercase; color: var(--muted); letter-spacing: .06em; }
+    nav.toc a {
+      display: block; color: var(--muted); text-decoration: none; font-size: .88rem;
+      padding: .28rem 0; border-left: 2px solid transparent; padding-left: .6rem;
+    }
+    nav.toc a:hover { color: var(--text); border-left-color: var(--accent); }
+    article.doc {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem 1.9rem 2.5rem;
+    }
+    article.doc h1 { font-size: 1.9rem; margin: 0 0 1rem; line-height: 1.25; }
+    article.doc h2 {
+      font-size: 1.35rem; margin: 2rem 0 .85rem; padding-top: .5rem;
+      border-top: 1px solid var(--border);
+    }
+    article.doc h2:first-of-type { border-top: 0; padding-top: 0; }
+    article.doc h3 { font-size: 1.1rem; margin: 1.4rem 0 .55rem; color: #c9d7f5; }
+    article.doc p { color: #d5def2; margin: .65rem 0; }
+    article.doc a { color: var(--link); }
+    article.doc hr { border: 0; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    article.doc ul, article.doc ol { padding-left: 1.25rem; color: #d5def2; }
+    article.doc li { margin: .35rem 0; }
+    article.doc code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .86em;
+      background: var(--code);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: .1rem .35rem;
+    }
+    article.doc pre {
+      background: var(--code);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      overflow: auto;
+    }
+    article.doc pre code { border: 0; padding: 0; background: transparent; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    th, td { border: 1px solid var(--border); padding: .55rem .7rem; text-align: left; vertical-align: top; }
+    th { background: #182338; color: #cfe0ff; }
+    td { color: #d5def2; }
+    .hero-note {
+      display: flex; gap: .75rem; align-items: flex-start;
+      background: linear-gradient(90deg, rgba(59,158,255,.12), rgba(255,122,41,.08));
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .85rem 1rem;
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .hero-note strong { color: var(--text); }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      nav.toc { position: relative; top: 0; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <img src="/favicon/favicon-32x32.png?v=faucon-brand3" alt="Faucon" />
+      <span>Faucon · Documentação</span>
+    </div>
+    <a class="back" href="/">← Voltar à consola</a>
+  </div>
+  <div class="layout">
+    <nav class="toc" id="toc">
+      <h4>Índice</h4>
+    </nav>
+    <article class="doc">
+      <div class="hero-note">
+        <div>📘</div>
+        <div>
+          Documentação do sistema <strong>Faucon</strong> (Makira Tec) — arquitectura, módulos, operação local e manutenção dos patches.
+        </div>
+      </div>
+<h1 id="top">Faucon — Documentação do Sistema</h1>
+<hr>
+<h2 id="1-o-que-o-faucon">1. O que é o Faucon</h2>
+<p>O <strong>Faucon</strong> é a plataforma operacional de logística e cadeia de abastecimento usada pela Makira Tec, construída sobre o Fleetbase e personalizada (marca, idioma português, menu, ícones e patches de UI/API).</p>
+<p>Serve para:</p>
+<ul>
+<li>Gerir frota, motoristas, veículos e pedidos em tempo real  </li>
+<li>Despachar e acompanhar entregas / operações  </li>
+<li>Comércio on-demand (loja / marketplace)  </li>
+<li>Contabilidade operacional (faturas, pagamentos, fluxo de caixa)  </li>
+<li>Portal do cliente, IA assistiva, identidade e acessos  </li>
+<li>Integrações via API REST, webhooks e WebSockets  </li>
+</ul>
+<p>Público-alvo típico: transportadoras, courier, last-mile, e-commerce com entrega própria, operações multi-depósito e equipas que precisam de controlos de identidade e auditoria.</p>
+<hr>
+<h2 id="2-identidade-e-branding">2. Identidade e branding</h2>
+<div class="table-wrap"><table>
+<tr><th>Elemento</th><th>Valor neste projeto</th></tr>
+<tr><td>Nome na consola</td><td><strong>Faucon Console</strong></td></tr>
+<tr><td>Favicon / ícone</td><td>Ave azul + seta laranja (Makira), fundo transparente</td></tr>
+<tr><td>Créditos UI</td><td>«desenvolvido por Makira Tec» (em vez de «Powered by Fleetbase»)</td></tr>
+<tr><td>Idioma principal</td><td>Português (<code>pt-br</code> normalizado na UI)</td></tr>
+<tr><td>Tema por omissão</td><td>Dark (configurável em Administração → Branding)</td></tr>
+<tr><td>Ícone de login / painel</td><td><code>branding.icon_url</code> (upload em Administração → Branding)</td></tr>
+</table></div>
+<p>O favicon do browser é gerado a partir do ícone de branding e servido por <code>console/docker-patches/favicon/</code>. Em runtime, <code>pt-ui-runtime.js</code> pode sincronizar o favicon com o <code>icon_url</code> da API de branding.</p>
+<hr>
+<h2 id="3-arquitectura-vis-o-geral">3. Arquitectura (visão geral)</h2>
+<pre><code class="lang-">┌─────────────────────────────────────────────────────────────┐
+│                     Utilizador (browser)                    │
+│                   http://localhost:4200                     │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │   Console (Ember.js / nginx) │
+              │   engines + patches Faucon   │
+              └──────────────┬──────────────┘
+                             │ REST + WebSocket
+         ┌───────────────────┼───────────────────┐
+         │                   │                   │
+┌────────▼────────┐  ┌───────▼────────┐  ┌───────▼────────┐
+│  API (Laravel)  │  │ SocketCluster  │  │  MySQL + Redis │
+│  :8000 (httpd)  │  │     :38000     │  │  cache/filas   │
+└────────┬────────┘  └────────────────┘  └────────────────┘
+         │
+   ┌─────┴─────┐
+   │ queue +   │
+   │ scheduler │
+   └───────────┘</code></pre>
+<h3 id="componentes-docker">Componentes Docker</h3>
+<div class="table-wrap"><table>
+<tr><th>Serviço</th><th>Função</th><th>Porta típica</th></tr>
+<tr><td><code>console</code></td><td>Frontend Ember (imagem + patches montados)</td><td><strong>4200</strong></td></tr>
+<tr><td><code>httpd</code></td><td>Proxy HTTP da API</td><td><strong>8000</strong></td></tr>
+<tr><td><code>application</code></td><td>API Laravel / Fleetbase</td><td>interno</td></tr>
+<tr><td><code>database</code></td><td>MySQL 8</td><td><strong>3309</strong> → 3306</td></tr>
+<tr><td><code>cache</code></td><td>Redis (cache + filas)</td><td>interno</td></tr>
+<tr><td><code>socket</code></td><td>SocketCluster (tempo real)</td><td><strong>38000</strong></td></tr>
+<tr><td><code>queue</code></td><td>Workers <code>php artisan queue:work</code></td><td>—</td></tr>
+<tr><td><code>scheduler</code></td><td>Cron (<code>go-crond</code>)</td><td>—</td></tr>
+</table></div>
+<p>Ficheiros-chave:</p>
+<ul>
+<li><code>docker-compose.yml</code> — stack base  </li>
+<li><code>docker-compose.override.yml</code> — <strong>ambiente local Faucon</strong> (volumes de patches, env, imagem da consola)  </li>
+<li><code>console/fleetbase.config.json</code> — host da API e do socket para a consola  </li>
+</ul>
+<hr>
+<h2 id="4-stack-t-cnica">4. Stack técnica</h2>
+<div class="table-wrap"><table>
+<tr><th>Camada</th><th>Tecnologia</th></tr>
+<tr><td>Frontend</td><td>Ember.js (engines por módulo), nginx estático em produção/imagem</td></tr>
+<tr><td>Backend</td><td>PHP / Laravel (pacotes <code>fleetbase/*-api</code>)</td></tr>
+<tr><td>Tempo real</td><td>SocketCluster</td></tr>
+<tr><td>Dados</td><td>MySQL 8</td></tr>
+<tr><td>Cache / filas</td><td>Redis</td></tr>
+<tr><td>Mapas / rotas</td><td>OSRM (configurável), Leaflet nos engines</td></tr>
+<tr><td>Extensões</td><td>Registry Bridge + marketplace Fleetbase</td></tr>
+<tr><td>Contentores</td><td>Docker Compose</td></tr>
+</table></div>
+<p>Pacotes API relevantes (<code>api/composer.json</code>): <code>core-api</code>, <code>fleetops-api</code>, <code>storefront-api</code>, <code>ledger-api</code>, <code>customer-portal-api</code>, <code>ai</code>, <code>valhalla-api</code>, <code>vroom-api</code>, <code>registry-bridge</code>.</p>
+<p>Engines na consola: <code>fleetops</code>, <code>storefront</code>, <code>ledger</code>, <code>iam</code>, <code>dev</code>, <code>ai</code>, <code>customer-portal</code>, <code>registry-bridge</code>, <code>valhalla</code>, <code>vroom</code>.</p>
+<hr>
+<h2 id="5-m-dulos-e-funcionalidades">5. Módulos e funcionalidades</h2>
+<h3 id="5-1-opera-es-da-frota-fleet-ops">5.1 Operações da frota (Fleet-Ops)</h3>
+<p>Rota base: <code>/console/fleet-ops</code> (na UI: <strong>Operações da frota</strong>).</p>
+<div class="table-wrap"><table>
+<tr><th>Área</th><th>O que faz</th></tr>
+<tr><td><strong>Pedidos / Ordens</strong></td><td>Criar, atribuir, acompanhar; fluxos de actividade configuráveis; board Kanban; mapa ao vivo</td></tr>
+<tr><td><strong>Operações ao vivo</strong></td><td>Visão em tempo real de pedidos activos, frota e mapa</td></tr>
+<tr><td><strong>Condutores</strong></td><td>Cadastro, estado, atribuição, avatar, contacto</td></tr>
+<tr><td><strong>Veículos</strong></td><td>Frota, tipos, estado, ligação a condutores</td></tr>
+<tr><td><strong>Contactos / locais</strong></td><td>Clientes, fornecedores, pontos de recolha/entrega</td></tr>
+<tr><td><strong>Rotas / optimização</strong></td><td>Planeamento; integração com motores Valhalla / Vroom</td></tr>
+<tr><td><strong>Áreas de serviço &amp; geofences</strong></td><td>Zonas, eventos de entrada/saída</td></tr>
+<tr><td><strong>Manutenção</strong></td><td>Ordens de manutenção, equipamentos, peças</td></tr>
+<tr><td><strong>Conectividade / telemática</strong></td><td>Dispositivos GPS, sensores, combustível, eventos</td></tr>
+<tr><td><strong>Análises</strong></td><td>Indicadores operacionais</td></tr>
+<tr><td><strong>Definições Fleet-Ops</strong></td><td>Configuração do módulo, tipos de pedido, campos custom</td></tr>
+</table></div>
+<p>Fluxos típicos:</p>
+<li class="ol">Configurar tipos de pedido e fluxos de estado  </li>
+<li class="ol">Registar veículos e condutores  </li>
+<li class="ol">Criar pedido → atribuir → acompanhar no mapa  </li>
+<li class="ol">Prova de entrega / conclusão → repercussão no Ledger se ligado  </li>
+<hr>
+<h3 id="5-2-storefront-loja-com-rcio">5.2 Storefront (Loja / comércio)</h3>
+<p>Rota: <code>/console/storefront</code>.</p>
+<ul>
+<li>Catálogo de produtos e categorias  </li>
+<li>Pedidos de loja / marketplace  </li>
+<li>Multi-vendor (conforme extensão)  </li>
+<li>Ligação nativa à entrega via Fleet-Ops  </li>
+<li>Definições de loja, branding da loja, checkout  </li>
+</ul>
+<p>Útil para food delivery, grocery, retail com last-mile próprio.</p>
+<hr>
+<h3 id="5-3-contabilidade-ledger">5.3 Contabilidade (Ledger)</h3>
+<p>Rota do engine Ledger.</p>
+<div class="table-wrap"><table>
+<tr><th>Função</th><th>Descrição</th></tr>
+<tr><td><strong>Dashboard financeiro</strong></td><td>Receitas, actividade recente, resumo</td></tr>
+<tr><td><strong>Fluxo de caixa</strong></td><td>Visão de entradas/saídas (UI PT: ao lado da actividade recente)</td></tr>
+<tr><td><strong>Faturas</strong></td><td>Emissão e gestão</td></tr>
+<tr><td><strong>Pagamentos</strong></td><td>Registo e conciliação</td></tr>
+<tr><td><strong>Carteiras</strong></td><td>Saldos / wallets</td></tr>
+<tr><td><strong>Despesas</strong></td><td>Controlo de custos operacionais</td></tr>
+</table></div>
+<hr>
+<h3 id="5-4-identidade-e-acesso-iam">5.4 Identidade e acesso (IAM)</h3>
+<ul>
+<li>Utilizadores, grupos, papéis (roles)  </li>
+<li>Políticas de permissão  </li>
+<li>Convites  </li>
+<li>Autenticação (incl. OAuth providers quando configurados)  </li>
+<li><strong>2FA</strong> (two-factor)  </li>
+</ul>
+<hr>
+<h3 id="5-5-programadores-developers">5.5 Programadores (Developers)</h3>
+<p>Rota: <code>/console/developers</code> (UI: <strong>Programadores</strong>).</p>
+<ul>
+<li>Chaves API (test / live)  </li>
+<li>Webhooks  </li>
+<li>Eventos de sistema e socket  </li>
+<li>Logs de pedidos  </li>
+<li>Ferramentas para integração externa  </li>
+</ul>
+<hr>
+<h3 id="5-6-portal-do-cliente-customer-portal">5.6 Portal do cliente (Customer Portal)</h3>
+<p>Workspace self-service para clientes finais / B2B:</p>
+<ul>
+<li>Criar e seguir pedidos  </li>
+<li>Cotações e pagamento  </li>
+<li>Faturas e documentos  </li>
+<li>Tickets de suporte  </li>
+</ul>
+<hr>
+<h3 id="5-7-ia-ai-engine">5.7 IA (AI Engine)</h3>
+<ul>
+<li>Criação de pedidos por linguagem natural  </li>
+<li>Consultas operacionais  </li>
+<li>Insights (quando API OpenAI/Claude configurada)  </li>
+</ul>
+<hr>
+<h3 id="5-8-extens-es-registry-bridge">5.8 Extensões (Registry Bridge)</h3>
+<ul>
+<li>Explorar e instalar extensões do registry Fleetbase  </li>
+<li>Extensões pré-instaladas possíveis via <code>REGISTRY_PREINSTALLED_EXTENSIONS</code>  </li>
+<li>Publicação / revisão (fluxos de developers do registry)  </li>
+</ul>
+<hr>
+<h3 id="5-9-valhalla-vroom">5.9 Valhalla &amp; Vroom</h3>
+<p>Motores de <strong>routing / matrix / optimização de rotas</strong> usados pelo Fleet-Ops para planeamento avançado de rotas e alocação.</p>
+<hr>
+<h3 id="5-10-administra-o-da-consola">5.10 Administração da consola</h3>
+<p>Áreas tipicamente sob <strong>Admin</strong>:</p>
+<ul>
+<li><strong>Branding</strong> — logo, ícone, tema  </li>
+<li><strong>Organizações</strong> — tenants, utilizadores, definições  </li>
+<li><strong>Configuração de serviços</strong> — mail, filesystem, queue, notification channels, mapas, etc.  </li>
+<li><strong>Métricas</strong> (patches API locais possíveis em <code>api/docker-patches/</code>)  </li>
+</ul>
+<p>Conta do utilizador: perfil, organizações, autenticação, notificações, 2FA.</p>
+<hr>
+<h3 id="5-11-apps-m-veis-ecossistema-fleetbase">5.11 Apps móveis (ecossistema Fleetbase)</h3>
+<p>Não fazem parte deste repo Docker da consola, mas integram-se à mesma API:</p>
+<div class="table-wrap"><table>
+<tr><th>App</th><th>Função</th></tr>
+<tr><td><strong>Navigator</strong></td><td>App do motorista (dispatch, navegação, POD)</td></tr>
+<tr><td><strong>Storefront App</strong></td><td>App do consumidor / loja</td></tr>
+</table></div>
+<hr>
+<h2 id="6-personaliza-es-faucon-neste-reposit-rio">6. Personalizações Faucon neste repositório</h2>
+<p>Tudo o que diferencia o Faucon do Fleetbase “vanilla” vive sobretudo em patches montados por volume — <strong>não</strong> na imagem Docker upstream.</p>
+<h3 id="6-1-pasta-console-docker-patches">6.1 Pasta <code>console/docker-patches/</code></h3>
+<div class="table-wrap"><table>
+<tr><th>Conteúdo</th><th>Função</th></tr>
+<tr><td><code>index.html</code></td><td>Título Faucon, favicons, CSS de UI, scripts</td></tr>
+<tr><td><code>assets/pt-ui-runtime.js</code></td><td>Tradução residual em runtime + política de menu + sync de favicon</td></tr>
+<tr><td><code>assets/@fleetbase/console-*.js</code> / <code>vendor-*.js</code></td><td>Bundles com strings PT e ajustes</td></tr>
+<tr><td><code>engines-dist/@fleetbase/*/assets/engine*.js</code></td><td>Engines traduzidos / ajustados</td></tr>
+<tr><td><code>favicon/</code> + <code>favicon.ico</code></td><td>Ícone Makira (transparência)</td></tr>
+<tr><td><code>images/icon*.png</code></td><td>Fallback do ícone na UI</td></tr>
+<tr><td><code>nginx/default.conf</code></td><td>Config nginx da consola</td></tr>
+<tr><td><code>_frozen_backup/</code></td><td>Backup seguro dos patches</td></tr>
+<tr><td><code>verify_patches.py</code> / <code>restore_from_frozen_backup.sh</code></td><td>Validação e restauro</td></tr>
+<tr><td>Scripts <code>*_pt_*.py</code></td><td>Pipelines de tradução EN→PT</td></tr>
+</table></div>
+<h3 id="6-2-pasta-api-docker-patches">6.2 Pasta <code>api/docker-patches/</code></h3>
+<p>Patches PHP/rotas montados sobre o vendor da API (ex.: métricas admin, settings Fleet-Ops).</p>
+<h3 id="6-3-docker-compose-override-yml">6.3 <code>docker-compose.override.yml</code></h3>
+<ul>
+<li>Usa imagem <code>fleetbase/fleetbase-console:latest</code> (sem rebuild local lento)  </li>
+<li>Monta <strong>todos</strong> os JS/CSS/engines/favicon/index necessários  </li>
+<li>Env local (APP_URL, CONSOLE_HOST, DB, mail log, etc.)  </li>
+</ul>
+<h3 id="6-4-idioma">6.4 Idioma</h3>
+<li class="ol">Substituições quoted nos bundles JS  </li>
+<li class="ol">Dicionário + walker em <code>pt-ui-runtime.js</code>  </li>
+<li class="ol">Normalização de locale para <code>pt-br</code> no <code>index.html</code>  </li>
+<li class="ol">Locale do contentor: <code>LANG=pt_PT.UTF-8</code>  </li>
+<h3 id="6-5-pol-tica-de-ui">6.5 Política de UI</h3>
+<p>O runtime esconde promoções Fleetbase (blog, Discord, changelog genérico, etc.) e reforça branding Makira, sem remover funcionalidade operacional.</p>
+<hr>
+<h2 id="7-arranque-local">7. Arranque local</h2>
+<h3 id="pr-requisitos">Pré-requisitos</h3>
+<ul>
+<li>Docker + Docker Compose v2  </li>
+<li>Memória Docker recomendada ≥ 4 GB  </li>
+<li>Portas livres: 4200, 8000, 38000, 3309  </li>
+</ul>
+<h3 id="subir">Subir</h3>
+<pre><code class="lang-bash">cd /caminho/para/fleetbase
+docker compose up -d</code></pre>
+<h3 id="urls">URLs</h3>
+<div class="table-wrap"><table>
+<tr><th>Serviço</th><th>URL</th></tr>
+<tr><td>Consola Faucon</td><td>http://localhost:4200</td></tr>
+<tr><td>API</td><td>http://localhost:8000</td></tr>
+<tr><td>Socket</td><td>ws://localhost:38000</td></tr>
+</table></div>
+<p>Primeiro acesso: onboarding (criar admin + organização), depois login.</p>
+<p>Configuração da consola → API:</p>
+<pre><code class="lang-json">{
+  &quot;API_HOST&quot;: &quot;http://localhost:8000&quot;,
+  &quot;SOCKETCLUSTER_HOST&quot;: &quot;localhost&quot;,
+  &quot;SOCKETCLUSTER_PORT&quot;: &quot;38000&quot;,
+  &quot;SOCKETCLUSTER_SECURE&quot;: &quot;false&quot;
+}</code></pre>
+<p>(<code>console/fleetbase.config.json</code>)</p>
+<h3 id="ap-s-alterar-patches-montados">Após alterar patches montados</h3>
+<ul>
+<li>Ficheiros bind-mount (JS, CSS, favicon, <code>index.html</code>) actualizam sem rebuild.  </li>
+<li>Novos volumes em <code>docker-compose.override.yml</code> exigem:  </li>
+</ul>
+<p><code>docker compose up -d console</code></p>
+<ul>
+<li>Hard refresh no browser (Ctrl+Shift+R) para cache de favicon/assets.</li>
+</ul>
+<hr>
+<h2 id="8-configura-o-de-sistema-servi-os">8. Configuração de sistema (serviços)</h2>
+<p>Na consola (Admin / Configuração), tipicamente:</p>
+<div class="table-wrap"><table>
+<tr><th>Serviço</th><th>Exemplos</th></tr>
+<tr><td>Mail</td><td>SMTP, log (dev), From name/address</td></tr>
+<tr><td>Filesystem / storage</td><td>Local, S3, etc.</td></tr>
+<tr><td>Queue</td><td>Redis</td></tr>
+<tr><td>Notification channels</td><td>Email, SMS, push (conforme drivers)</td></tr>
+<tr><td>Mapas</td><td>Google Maps / outros + locale</td></tr>
+<tr><td>Socket</td><td>já via SocketCluster no compose</td></tr>
+<tr><td>Branding</td><td>logo, ícone, tema</td></tr>
+</table></div>
+<p>Em desenvolvimento local o mail costuma ir para o driver <code>log</code>.</p>
+<hr>
+<h2 id="9-modelo-de-dados-resumo">9. Modelo de dados (resumo)</h2>
+<p>Fleetbase modela entidades centrais como:</p>
+<ul>
+<li><strong>Organização / company</strong> (tenant)  </li>
+<li><strong>Users</strong> e papéis IAM  </li>
+<li><strong>Orders</strong> com configs e activity flows  </li>
+<li><strong>Drivers</strong>, <strong>vehicles</strong>, <strong>places</strong>, <strong>contacts</strong>  </li>
+<li><strong>Files / uploads</strong>  </li>
+<li><strong>Storefront</strong>: products, categories, store orders  </li>
+<li><strong>Ledger</strong>: invoices, payments, wallets  </li>
+<li><strong>Settings / branding</strong>  </li>
+</ul>
+<p>Diagrama ER do upstream: <code>erd.svg</code> / <code>erd-dark.svg</code> na raiz do repo.</p>
+<hr>
+<h2 id="10-seguran-a-e-acessos">10. Segurança e acessos</h2>
+<ul>
+<li>Autenticação na consola + tokens/API keys para integrações  </li>
+<li>Separação test/live nas chaves de developers  </li>
+<li>Roles e policies (IAM)  </li>
+<li>2FA opcional  </li>
+<li>Sessões / CORS / <code>FRONTEND_HOSTS</code> e <code>CONSOLE_HOST</code> no override  </li>
+<li>Origins do SocketCluster restritas em produção  </li>
+</ul>
+<p><strong>Produção:</strong> nunca expor MySQL publicamente; definir <code>SOCKETCLUSTER_OPTIONS</code> com origins HTTPS reais; secrets fora do git; backups de <code>storage</code> e DB.</p>
+<hr>
+<h2 id="11-regras-cr-ticas-de-manuten-o-faucon">11. Regras críticas de manutenção (Faucon)</h2>
+<p>&gt; <strong>Nunca restaurar assets da imagem Docker upstream</strong> sobre <code>console/docker-patches/</code>.</p>
+<p>Isso apaga traduções PT, branding e remoções de menu. Ver:</p>
+<ul>
+<li><code>console/docker-patches/NEVER_RESTORE_FROM_IMAGE.md</code>  </li>
+<li><code>.cursor/rules/faucon-never-restore-image.mdc</code>  </li>
+</ul>
+<p>Se um JS partir:</p>
+<li class="ol"><code>bash console/docker-patches/restore_from_frozen_backup.sh</code>  </li>
+<li class="ol">Ou recuperar de git / <code>_frozen_backup/</code>  </li>
+<li class="ol"><code>python3 console/docker-patches/verify_patches.py</code>  </li>
+<li class="ol">Reaplicar traduções <strong>em cima</strong> dos patches  </li>
+<p>Camadas que devem sobreviver sempre: <code>pt-ui-runtime.js</code>, CSS Faucon, mounts do override, pasta <code>favicon/</code>.</p>
+<hr>
+<h2 id="12-estrutura-til-do-reposit-rio">12. Estrutura útil do repositório</h2>
+<pre><code class="lang-">fleetbase/
+├── api/                      # Laravel + storage + docker-patches API
+├── console/                  # Código Ember + fleetbase.config.json
+│   └── docker-patches/       # ★ Fonte da verdade da UI Faucon
+├── packages/                 # Código fonte de engines/APIs (monorepo)
+├── docker/                   # HTTP, DB init, etc.
+├── docs/                     # Esta documentação
+├── docker-compose.yml
+├── docker-compose.override.yml
+├── erd.svg                   # Schema da BD
+└── README.md                 # README upstream Fleetbase</code></pre>
+<hr>
+<h2 id="13-fluxos-de-neg-cio-exemplo">13. Fluxos de negócio exemplo</h2>
+<h3 id="entrega-courier">Entrega courier</h3>
+<li class="ol">Cliente ou operador cria pedido (consola / API / portal / storefront)  </li>
+<li class="ol">Orquestração / atribuição a motorista + veículo  </li>
+<li class="ol">Motorista actualiza estados (Navigator ou consola)  </li>
+<li class="ol">Tracking em tempo real (socket + mapa)  </li>
+<li class="ol">Conclusão / POD → faturação no Ledger se aplicável  </li>
+<h3 id="loja-com-entrega-pr-pria">Loja com entrega própria</h3>
+<li class="ol">Produtos no Storefront  </li>
+<li class="ol">Pedido da loja  </li>
+<li class="ol">Despacho automático ou manual no Fleet-Ops  </li>
+<li class="ol">Entrega e notificação ao cliente  </li>
+<h3 id="manuten-o-de-frota">Manutenção de frota</h3>
+<li class="ol">Equipamentos e peças cadastrados  </li>
+<li class="ol">Ordem de manutenção  </li>
+<li class="ol">Histórico ligado ao veículo  </li>
+<li class="ol">Custos podem reflectir-se em despesas (Ledger)  </li>
+<hr>
+<h2 id="14-troubleshooting-r-pido">14. Troubleshooting rápido</h2>
+<div class="table-wrap"><table>
+<tr><th>Sintoma</th><th>Verificar</th></tr>
+<tr><td>Consola em inglês de novo</td><td>Patches não montados ou restaurados da imagem; <code>verify_patches.py</code></td></tr>
+<tr><td>API inacessível</td><td><code>docker compose ps</code>, logs <code>httpd</code>/<code>application</code>, <code>API_HOST</code></td></tr>
+<tr><td>Sem tempo real</td><td>Socket <code>:38000</code>, origins no override</td></tr>
+<tr><td>Favicon antigo</td><td>Hard refresh; mounts de <code>favicon/</code>; query <code>?v=</code> no <code>index.html</code></td></tr>
+<tr><td>Upload falha</td><td><code>storage</code> montado, permissões, config filesystem</td></tr>
+<tr><td>Tradução a meio</td><td><code>pt-ui-runtime.js</code> + bundles; limpar cache browser</td></tr>
+</table></div>
+<pre><code class="lang-bash">docker compose ps
+docker compose logs -f console application httpd
+curl -s http://localhost:8000/int/v1/settings/branding
+curl -sI http://localhost:4200/favicon/favicon-32x32.png</code></pre>
+<hr>
+<h2 id="15-gloss-rio">15. Glossário</h2>
+<div class="table-wrap"><table>
+<tr><th>Termo</th><th>Significado</th></tr>
+<tr><td><strong>Fleetbase</strong></td><td>OS open-source de logística (upstream)</td></tr>
+<tr><td><strong>Faucon</strong></td><td>Nome/produto Makira sobre Fleetbase neste projeto</td></tr>
+<tr><td><strong>Engine</strong></td><td>Módulo Ember montado na consola</td></tr>
+<tr><td><strong>Patch</strong></td><td>Ficheiro local montado por cima da imagem Docker</td></tr>
+<tr><td><strong>POD</strong></td><td>Proof of Delivery (prova de entrega)</td></tr>
+<tr><td><strong>Tenant</strong></td><td>Organização isolada na mesma instalação</td></tr>
+<tr><td><strong>Registry</strong></td><td>Marketplace / repositório de extensões</td></tr>
+</table></div>
+    </article>
+  </div>
+  <script>
+    (function() {
+      var toc = document.getElementById('toc');
+      document.querySelectorAll('article.doc h2').forEach(function(h) {
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        toc.appendChild(a);
+      });
+    })();
+  </script>
+</body>
+</html>

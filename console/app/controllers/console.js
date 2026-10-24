@@ -63,6 +63,7 @@ export default class ConsoleController extends Controller {
             acceptButtonText: this.intl.t('common.confirm'),
             acceptButtonIcon: 'check',
             acceptButtonIconPrefix: 'fas',
+            declineButtonText: this.intl.t('common.cancel'),
             action: 'join',
             next: null,
             name: null,

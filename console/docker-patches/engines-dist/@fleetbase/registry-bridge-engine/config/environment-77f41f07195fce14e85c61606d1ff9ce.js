@@ -1,0 +1,1 @@
+define("@fleetbase/registry-bridge-engine/config/environment",function(){return{default:{modulePrefix:"@fleetbase/registry-bridge-engine",mountedEngineRoutePrefix:"console.extensions.",stripe:{publishableKey:null},registry:{selfHosted:!1},APP:{}}}})

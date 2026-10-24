@@ -1,0 +1,340 @@
+{
+  "stamp": 1792880794598,
+  "tag": "QA-E2E-1792880794598",
+  "entities": {
+    "vendor": {
+      "id": 1,
+      "uuid": "6c0fde9b-e9e1-4829-861f-6e281f14de37",
+      "public_id": "vendor_dl9nbmlblh",
+      "place_uuid": null,
+      "connect_company_uuid": null,
+      "logo_uuid": null,
+      "type_uuid": null,
+      "internal_id": "MA084488",
+      "business_id": null,
+      "name": "QA-E2E-1792880794598 Fornecedor",
+      "email": "fornecedor.1792880794598@makira.test",
+      "phone": "+244900000002",
+      "logo_url": "https://s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png",
+      "custom_field_values": [],
+      "photo_url": "https://s3.ap-southeast-1.amazonaws.com/flb-assets/static/no-avatar.png",
+      "place": null,
+      "places": [],
+      "personnels": [],
+      "address": null,
+      "address_street": null,
+      "country": null,
+      "type": "vendor",
+      "meta": {
+        "e2e": true,
+        "tag": "QA-E2E-1792880794598"
+      },
+      "status": null,
+      "slug": "qa-e2e-1792880794598-fornecedor",
+      "updated_at": "2026-10-24T22:26:36.000000Z",
+      "created_at": "2026-10-24T22:26:36.000000Z",
+      "website_url": null
+    },
+    "placeOrigin": {
+      "id": 2,
+      "uuid": "8ebdbcb7-b2fa-41a4-8d96-d70fef27cd55",
+      "public_id": "place_cptp95kyiv",
+      "company_uuid": "38fb49f9-fa2b-40c5-b78c-5ba3cf27ec8f",
+      "owner_uuid": null,
+      "owner_type": null,
+      "name": "QA-E2E-1792880794598 ORIGEM LUANDA",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          13.2344,
+          -8.8383
+        ]
+      },
+      "address": "QA-E2E-1792880794598 ORIGEM LUANDA - ANGOLA",
+      "address_html": "QA-E2E-1792880794598 ORIGEM LUANDA - ANGOLA",
+      "avatar_url": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/place-icons/basic-building.png",
+      "avatar_value": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/place-icons/basic-building.png",
+      "street1": "QA-E2E-1792880794598 ORIGEM LUANDA",
+      "street2": null,
+      "city": "LUANDA",
+      "custom_field_values": [],
+      "province": null,
+      "postal_code": null,
+      "neighborhood": null,
+      "district": null,
+      "building": null,
+      "security_access_code": null,
+      "country": "AO",
+      "country_name": "Angola",
+      "phone": null,
+      "owner": null,
+      "type": "place",
+      "meta": {
+        "e2e": true,
+        "tag": "QA-E2E-1792880794598"
+      },
+      "updated_at": "2026-10-24T22:26:36.000000Z",
+      "created_at": "2026-10-24T22:26:36.000000Z"
+    },
+    "placeDest": {
+      "id": 3,
+      "uuid": "67c79f1f-cb6b-429f-aa62-21d12617cb23",
+      "public_id": "place_0u3a1xkgt7",
+      "company_uuid": "38fb49f9-fa2b-40c5-b78c-5ba3cf27ec8f",
+      "owner_uuid": null,
+      "owner_type": null,
+      "name": "QA-E2E-1792880794598 DESTINO VIANA",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          13.3701,
+          -8.9026
+        ]
+      },
+      "address": "QA-E2E-1792880794598 DESTINO VIANA - LUANDA, ANGOLA",
+      "address_html": "QA-E2E-1792880794598 DESTINO VIANA - LUANDA, ANGOLA",
+      "avatar_url": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/place-icons/basic-building.png",
+      "avatar_value": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/place-icons/basic-building.png",
+      "street1": "QA-E2E-1792880794598 DESTINO VIANA",
+      "street2": null,
+      "city": "LUANDA",
+      "custom_field_values": [],
+      "province": null,
+      "postal_code": null,
+      "neighborhood": null,
+      "district": null,
+      "building": null,
+      "security_access_code": null,
+      "country": "AO",
+      "country_name": "Angola",
+      "phone": null,
+      "owner": null,
+      "type": "place",
+      "meta": {
+        "e2e": true,
+        "tag": "QA-E2E-1792880794598"
+      },
+      "updated_at": "2026-10-24T22:26:36.000000Z",
+      "created_at": "2026-10-24T22:26:36.000000Z"
+    },
+    "fleet": {
+      "id": 1,
+      "uuid": "7e873b26-165e-4158-8708-0a6a0e272bbf",
+      "public_id": "fleet_gxoqlmixc1",
+      "name": "QA-E2E-1792880794598 Frota",
+      "color": null,
+      "task": null,
+      "status": null,
+      "photo_url": "https://s3.ap-northeast-2.amazonaws.com/fleetbase/public/default-fleet.png",
+      "drivers_count": 0,
+      "drivers_online_count": 0,
+      "vehicles_count": 0,
+      "vehicles_online_count": 0,
+      "service_area_id": null,
+      "custom_field_values": [],
+      "zone_id": null,
+      "vendor_id": null,
+      "parent_fleet_id": null,
+      "photo_id": null,
+      "photo": null,
+      "updated_at": "2026-10-24T22:26:37.000000Z",
+      "created_at": "2026-10-24T22:26:37.000000Z"
+    },
+    "store": {
+      "uuid": "dd89ecf7-71d8-4672-99ea-68564f96b01a",
+      "public_id": "store_ai5t8u2nmt",
+      "name": "Loja Teste"
+    },
+    "product": {
+      "id": 2,
+      "uuid": "193e3a4e-adfc-42be-84d5-2543ffbbd33d",
+      "public_id": "product_9nixvsj3jt",
+      "company_uuid": "38fb49f9-fa2b-40c5-b78c-5ba3cf27ec8f",
+      "store_uuid": "dd89ecf7-71d8-4672-99ea-68564f96b01a",
+      "category_uuid": null,
+      "created_by_uuid": "15d27336-8e69-4fba-82b8-c52e571d2c19",
+      "primary_image_uuid": null,
+      "name": "QA-E2E-1792880794598 Produto",
+      "description": "Produto criado no teste E2E Faucon — não apagar",
+      "category": null,
+      "sku": "SKU-1792880794598",
+      "primary_image_url": "https://flb-assets.s3.ap-southeast-1.amazonaws.com/static/image-file-icon.png",
+      "price": 1500,
+      "sale_price": 1500,
+      "currency": "AOA",
+      "is_on_sale": null,
+      "is_recommended": null,
+      "is_service": null,
+      "is_bookable": false,
+      "is_available": true,
+      "tags": [],
+      "status": "published",
+      "meta": {
+        "e2e": true,
+        "tag": "QA-E2E-1792880794598"
+      },
+      "slug": "qa-e2e-1792880794598-produto",
+      "translations": [],
+      "addon_categories": [],
+      "variants": [],
+      "files": [],
+      "hours": [],
+      "youtube_urls": [],
+      "created_at": "2026-10-24T22:26:38.000000Z",
+      "updated_at": "2026-10-24T22:26:38.000000Z",
+      "type": "product"
+    },
+    "route": {
+      "id": 1,
+      "_key": "06108438a90adc96a0784c55ef3a13d131b4710ab2cb5321e041c9d444205c32",
+      "uuid": "8e593b62-d9a5-4067-b249-47f6f01006cf",
+      "company_uuid": "38fb49f9-fa2b-40c5-b78c-5ba3cf27ec8f",
+      "order_uuid": null,
+      "details": null,
+      "total_distance": null,
+      "total_time": null,
+      "deleted_at": null,
+      "created_at": "2026-10-24T22:26:38.000000Z",
+      "updated_at": "2026-10-24T22:26:38.000000Z",
+      "payload": null,
+      "driver": null,
+      "order_status": null,
+      "order_public_id": null,
+      "order_internal_id": null,
+      "order_dispatched_at": null
+    }
+  },
+  "ui": [
+    {
+      "section": "login",
+      "msg": "Ainda em auth: http://localhost:4200/auth",
+      "ok": false,
+      "at": "2026-10-24T22:26:45.905Z"
+    }
+  ],
+  "api": [
+    {
+      "section": "auth",
+      "msg": "Login API OK",
+      "ok": true,
+      "at": "2026-10-24T22:26:36.395Z"
+    },
+    {
+      "section": "customer",
+      "msg": "FAIL 400",
+      "ok": false,
+      "at": "2026-10-24T22:26:36.588Z"
+    },
+    {
+      "section": "vendor",
+      "msg": "Criado vendor_dl9nbmlblh",
+      "ok": true,
+      "at": "2026-10-24T22:26:36.681Z"
+    },
+    {
+      "section": "place",
+      "msg": "Criado placeOrigin place_cptp95kyiv",
+      "ok": true,
+      "at": "2026-10-24T22:26:36.871Z"
+    },
+    {
+      "section": "place",
+      "msg": "Criado placeDest place_0u3a1xkgt7",
+      "ok": true,
+      "at": "2026-10-24T22:26:36.996Z"
+    },
+    {
+      "section": "vehicle",
+      "msg": "FAIL 400",
+      "ok": false,
+      "at": "2026-10-24T22:26:37.088Z"
+    },
+    {
+      "section": "fleet",
+      "msg": "Criado fleet_gxoqlmixc1",
+      "ok": true,
+      "at": "2026-10-24T22:26:37.145Z"
+    },
+    {
+      "section": "product",
+      "msg": "Criado product_9nixvsj3jt",
+      "ok": true,
+      "at": "2026-10-24T22:26:38.900Z"
+    },
+    {
+      "section": "order",
+      "msg": "FAIL 500 {\"message\":\"Illuminate\\\\Validation\\\\Factory::make(): Argument #1 ($data) must be of type array, null given, called in /fleetbase/api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 355\",\"exception\":\"TypeError\",\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/",
+      "ok": false,
+      "at": "2026-10-24T22:26:38.983Z"
+    },
+    {
+      "section": "route",
+      "msg": "Criado 8e593b62-d9a5-4067-b249-47f6f01006cf",
+      "ok": true,
+      "at": "2026-10-24T22:26:39.001Z"
+    },
+    {
+      "section": "verify-list-contacts",
+      "msg": "não confirmado (200)",
+      "ok": false,
+      "at": "2026-10-24T22:26:39.025Z"
+    },
+    {
+      "section": "verify-list-vendors",
+      "msg": "encontrado na listagem",
+      "ok": true,
+      "at": "2026-10-24T22:26:39.040Z"
+    },
+    {
+      "section": "verify-list-vehicles",
+      "msg": "não confirmado (200)",
+      "ok": false,
+      "at": "2026-10-24T22:26:39.061Z"
+    },
+    {
+      "section": "verify-list-places",
+      "msg": "encontrado na listagem",
+      "ok": true,
+      "at": "2026-10-24T22:26:39.083Z"
+    },
+    {
+      "section": "verify-list-orders",
+      "msg": "não confirmado (200)",
+      "ok": false,
+      "at": "2026-10-24T22:26:39.107Z"
+    },
+    {
+      "section": "verify-list-products",
+      "msg": "encontrado na listagem",
+      "ok": true,
+      "at": "2026-10-24T22:26:39.126Z"
+    }
+  ],
+  "errors": [
+    {
+      "section": "customer",
+      "msg": "{\"errors\":[\"This email is already used by a customer.\"]}"
+    },
+    {
+      "section": "vehicle",
+      "msg": "{\"errors\":[\"SQLSTATE[HY000]: General error: 1364 Field 'online' doesn't have a default value (Connection: mysql, SQL: insert into `vehicles` (`avatar_url`, `status`, `plate_number`, `make`, `model`, `year`, `name`, `meta`, `company_uuid`, `uuid`, `public_id`, `slug`, `updated_at`, `created_at`) values (https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/vehicle-icons/mini_bus.svg, available, E2E794598, Volvo, FH16, 2022, QA-E2E-1792880794598 Camião, {\\\"e2e\\\":true,\\\"tag\\\":\\\"QA-E2E-1792880794598\\\"}, 38fb49f9-fa2b-40c5-b78c-5ba3cf27ec8f, a84773af-d4d6-4ef6-97bc-6fb6bdcbe915, vehicle_fqjutwyqom, 2022-volvo-fh16-e2e794598, 2026-10-24 22:26:37, 2026-10-24 22:26:37))\"]}"
+    },
+    {
+      "section": "order",
+      "msg": "{\"message\":\"Illuminate\\\\Validation\\\\Factory::make(): Argument #1 ($data) must be of type array, null given, called in /fleetbase/api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 355\",\"exception\":\"TypeError\",\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Validation/Factory.php\",\"line\":105,\"trace\":[{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php\",\"line\":355,\"function\":\"make\",\"class\":\"Illuminate\\\\Validation\\\\Factory\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/fleetops-api/server/src/Http/Controllers/Internal/v1/OrderController.php\",\"line\":120,\"function\":\"__callStatic\",\"class\":\"Illuminate\\\\Support\\\\Facades\\\\Facade\",\"type\":\"::\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Controller.php\",\"line\":54,\"function\":\"createRecord\",\"class\":\"Fleetbase\\\\FleetOps\\\\Http\\\\Controllers\\\\Internal\\\\v1\\\\OrderController\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php\",\"line\":43,\"function\":\"callAction\",\"class\":\"Illuminate\\\\Routing\\\\Controller\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Route.php\",\"line\":259,\"function\":\"dispatch\",\"class\":\"Illuminate\\\\Routing\\\\ControllerDispatcher\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Route.php\",\"line\":205,\"function\":\"runController\",\"class\":\"Illuminate\\\\Routing\\\\Route\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\"line\":806,\"function\":\"run\",\"class\":\"Illuminate\\\\Routing\\\\Route\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":144,\"function\":\"Illuminate\\\\Routing\\\\{closure}\",\"class\":\"Illuminate\\\\Routing\\\\Router\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/fleetops-api/server/src/Http/Middleware/SetupDriverSession.php\",\"line\":23,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\FleetOps\\\\Http\\\\Middleware\\\\SetupDriverSession\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/fleetops-api/server/src/Http/Middleware/TransformLocationMiddleware.php\",\"line\":24,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\FleetOps\\\\Http\\\\Middleware\\\\TransformLocationMiddleware\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/ValidateETag.php\",\"line\":19,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\ValidateETag\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/TrackPresence.php\",\"line\":18,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\TrackPresence\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/AuthorizationGuard.php\",\"line\":25,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\AuthorizationGuard\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/SetupFleetbaseSession.php\",\"line\":28,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\SetupFleetbaseSession\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php\",\"line\":57,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\"line\":121,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\"line\":64,\"function\":\"handleStatefulRequest\",\"class\":\"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php\",\"line\":37,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Cookie\\\\Middleware\\\\AddQueuedCookiesToResponse\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":119,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\"line\":805,\"function\":\"then\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\"line\":784,\"function\":\"runRouteWithinStack\",\"class\":\"Illuminate\\\\Routing\\\\Router\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\"line\":748,\"function\":\"runRoute\",\"class\":\"Illuminate\\\\Routing\\\\Router\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\"line\":737,\"function\":\"dispatchToRoute\",\"class\":\"Illuminate\\\\Routing\\\\Router\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\"line\":200,\"function\":\"dispatch\",\"class\":\"Illuminate\\\\Routing\\\\Router\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":144,\"function\":\"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/AttachCacheHeaders.php\",\"line\":24,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\AttachCacheHeaders\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/EnsureFleetbaseConfigured.php\",\"line\":38,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\EnsureFleetbaseConfigured\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/MergeConfigFromSettings.php\",\"line\":14,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\MergeConfigFromSettings\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/ResetJsonResourceWrap.php\",\"line\":14,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\ResetJsonResourceWrap\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/fleetbase/core-api/src/Http/Middleware/RequestTimer.php\",\"line\":11,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Fleetbase\\\\Http\\\\Middleware\\\\RequestTimer\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\"line\":21,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php\",\"line\":31,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\"line\":21,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php\",\"line\":40,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php\",\"line\":27,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php\",\"line\":99,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php\",\"line\":62,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php\",\"line\":39,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":183,\"function\":\"handle\",\"class\":\"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\"line\":119,\"function\":\"Illuminate\\\\Pipeline\\\\{closure}\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\"line\":175,\"function\":\"then\",\"class\":\"Illuminate\\\\Pipeline\\\\Pipeline\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\"line\":144,\"function\":\"sendRequestThroughRouter\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/octane/src/ApplicationGateway.php\",\"line\":36,\"function\":\"handle\",\"class\":\"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/octane/src/Worker.php\",\"line\":84,\"function\":\"handle\",\"class\":\"Laravel\\\\Octane\\\\ApplicationGateway\",\"type\":\"->\"},{\"file\":\"/fleetbase/api/vendor/laravel/octane/bin/frankenphp-worker.php\",\"line\":77,\"function\":\"handle\",\"class\":\"Laravel\\\\Octane\\\\Worker\",\"type\":\"->\"},{\"function\":\"{closure}\"},{\"file\":\"/fleetbase/api/vendor/laravel/octane/bin/frankenphp-worker.php\",\"line\":98,\"function\":\"frankenphp_handle_request\"},{\"file\":\"/fleetbase/api/public/frankenphp-worker.php\",\"line\":7,\"function\":\"require\"}]}"
+    },
+    {
+      "section": "verify-list-contacts",
+      "msg": "status=200"
+    },
+    {
+      "section": "verify-list-vehicles",
+      "msg": "status=200"
+    },
+    {
+      "section": "verify-list-orders",
+      "msg": "status=200"
+    }
+  ],
+  "fixes": []
+}
