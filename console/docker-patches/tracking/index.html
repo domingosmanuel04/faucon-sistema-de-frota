@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seguir encomenda · Faucon</title>
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <style>
+    :root{--bg:#0b1220;--panel:#121a2b;--border:#243049;--text:#e8eef9;--muted:#93a0b8;--accent:#3b82f6;--ok:#22c55e}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,sans-serif;color:var(--text);background:radial-gradient(900px 500px at 80% -20%,#1a2a4a 0%,var(--bg) 50%)}
+    header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+    header img{width:36px;height:36px;border-radius:8px}.brand{font-weight:700}
+    main{max-width:560px;margin:0 auto;padding:2rem 1.25rem}
+    h1{font-size:1.6rem;margin:0 0 .5rem}p.lead{color:var(--muted);margin:0 0 1.5rem}
+    form{display:grid;gap:.75rem;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
+    label{display:grid;gap:.35rem;font-size:.9rem;color:var(--muted)}
+    input{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.65rem .75rem;font-size:1rem}
+    button{appearance:none;border:0;background:var(--accent);color:#fff;padding:.7rem 1rem;border-radius:8px;font-weight:600;cursor:pointer}
+    .card{margin-top:1.25rem;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.1rem;display:none}
+    .card.show{display:block}.status{font-size:1.1rem;font-weight:700}.meta{color:var(--muted);font-size:.85rem;margin-top:.35rem}
+    .err{color:#fca5a5;margin-top:.75rem;display:none}.ok{color:var(--ok)}
+    footer{margin-top:2rem;color:var(--muted);font-size:.8rem}
+  </style>
+</head>
+<body>
+<header>
+  <img src="/images/icon.png" alt="Faucon" />
+  <div class="brand">Faucon</div>
+</header>
+<main>
+  <h1>Seguir encomenda</h1>
+  <p class="lead">Introduza o número de tracking para ver o estado actual. Página pública polida (v1).</p>
+  <form id="form">
+    <label>Número de tracking<input name="tracking" required placeholder="ex.: tracking_…" autocomplete="off"></label>
+    <button type="submit">Consultar</button>
+    <div class="err" id="err"></div>
+  </form>
+  <div class="card" id="card">
+    <div class="status" id="status"></div>
+    <div class="meta" id="meta"></div>
+  </div>
+  <footer>Powered by Faucon · Makira Tec · <a href="/torre/" style="color:#93c5fd">Torre</a></footer>
+</main>
+<script>
+(function(){
+  var form=document.getElementById('form'), err=document.getElementById('err'), card=document.getElementById('card');
+  form.onsubmit=function(ev){
+    ev.preventDefault();
+    err.style.display='none'; card.classList.remove('show');
+    var t=form.tracking.value.trim();
+    fetch('/int/v1/fleet-ops/lookup?tracking='+encodeURIComponent(t),{headers:{'Accept':'application/json'},credentials:'omit'})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j,status:r.status};});})
+      .then(function(res){
+        if(!res.ok){err.textContent=(res.j&&(res.j.error||res.j.message))||('Não encontrado ('+res.status+')');err.style.display='block';return;}
+        var o=res.j.data||res.j;
+        document.getElementById('status').textContent=(o.status||o.tracking_number||'Encontrada');
+        document.getElementById('meta').innerHTML=
+          '<div>ID: '+(o.public_id||o.uuid||'—')+'</div>'+
+          '<div>Actualizado: '+(o.updated_at||'—')+'</div>'+
+          (o.tracker_data?'<div class="ok">Tracker disponível</div>':'');
+        card.classList.add('show');
+      })
+      .catch(function(e){err.textContent=e.message;err.style.display='block';});
+  };
+})();
+</script>
+</body>
+</html>

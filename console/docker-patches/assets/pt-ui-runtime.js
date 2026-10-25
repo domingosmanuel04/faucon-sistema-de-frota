@@ -2884,6 +2884,71 @@
 })();
 /* FAUCON_DOCS_MENU_V1_END */
 
+/* FAUCON_TORRE_MENU_V1 — Torre de Controlo after Documentação */
+(function () {
+  var HREF = '/torre/';
+  var ID = 'faucon-torre-nav-item';
+  function textOf(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
+  function findDocsLinks() {
+    return Array.prototype.slice.call(document.querySelectorAll('a')).filter(function (a) {
+      return a.id === 'faucon-documentation-nav-item' || /^Documenta[cç][aã]o$/i.test(textOf(a)) || (a.getAttribute('href') || '').indexOf('/docs/sistema') === 0;
+    });
+  }
+  function already(scope) {
+    return !!(scope && (scope.querySelector('#' + ID) || scope.querySelector('a[href="' + HREF + '"]')));
+  }
+  function build(template) {
+    var a = document.createElement('a');
+    a.id = ID;
+    a.href = HREF;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = (template && template.className ? template.className : 'next-dd-item') + ' faucon-torre-nav-item';
+    a.setAttribute('data-faucon-torre', '1');
+    if (template) {
+      a.innerHTML = template.innerHTML;
+      var replaced = false;
+      a.querySelectorAll('span,div').forEach(function (n) {
+        if (replaced || n.children.length) return;
+        if (textOf(n)) { n.textContent = 'Torre de Controlo'; replaced = true; }
+      });
+      if (!replaced) {
+        var icons = a.querySelectorAll('svg,i,.fa,.fas,.far,.svg-inline--fa');
+        a.textContent = '';
+        icons.forEach(function (ic) { a.appendChild(ic.cloneNode(true)); });
+        var span = document.createElement('span');
+        span.textContent = 'Torre de Controlo';
+        a.appendChild(span);
+      }
+    } else {
+      a.textContent = 'Torre de Controlo';
+      a.style.cssText = 'display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;text-decoration:none;';
+    }
+    return a;
+  }
+  function inject() {
+    try {
+      var docs = findDocsLinks();
+      if (!docs.length) return;
+      docs.forEach(function (doc) {
+        var menu = doc.closest('.next-dd-menu, .ember-basic-dropdown-content, [role="menu"], .user-menu') || doc.parentElement;
+        if (already(menu)) return;
+        var item = build(doc);
+        var anchor = doc.closest('li, .next-dd-item-wrapper, [class*="nav-item"]') || doc;
+        if (anchor.parentNode) {
+          if (anchor.nextSibling) anchor.parentNode.insertBefore(item, anchor.nextSibling);
+          else anchor.parentNode.appendChild(item);
+        }
+      });
+    } catch (e) {}
+  }
+  setInterval(inject, 900);
+  document.addEventListener('DOMContentLoaded', inject);
+  document.addEventListener('click', function () { setTimeout(inject, 80); setTimeout(inject, 320); }, true);
+  new MutationObserver(inject).observe(document.documentElement, { childList: true, subtree: true });
+})();
+/* FAUCON_TORRE_MENU_V1_END */
+
 /* FAUCON_FAVICON_SYNC_V1 — use branding icon (login/panel) as system favicon */
 (function () {
   var applied = '';

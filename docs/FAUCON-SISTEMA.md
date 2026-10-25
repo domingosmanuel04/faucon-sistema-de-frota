@@ -1,5 +1,7 @@
 # Faucon — Documentação do Sistema
 
+Roadmap de evolução: [`ROADMAP-FAUCON.md`](./ROADMAP-FAUCON.md) · Torre de Controlo: `/torre/`
+
 ---
 
 ## 1. O que é o Faucon
@@ -458,7 +460,25 @@ curl -sI http://localhost:4200/favicon/favicon-32x32.png
 
 ---
 
-## 15. Glossário
+## 15. Torre de Controlo e módulos Faucon
+
+UI: [`/torre/`](http://localhost:4200/torre/) · Tracking público: [`/tracking/`](http://localhost:4200/tracking/) · API: `/int/v1/control-tower/*`
+
+| Módulo | Endpoints principais |
+|--------|----------------------|
+| Operação / SLA | `summary`, `exceptions`, `sla`, `assignment-suggest`, `assign-confirm` |
+| POD | `pod/*`, `pod-queue`, `complete-order` |
+| Custos | `cost-rates`, `cost-summary`, `driver-settlement`, `invoice-draft` |
+| Canais | `whatsapp`, `whatsapp/dry-run`, `payments`, `payments/intent` |
+| IA / riscos | `delay-prediction`, `anomalies`, `planned-vs-actual` |
+| Sistema | `health`, `features`, `environments`, webhooks retry |
+| Plataforma AO | `corridors`, `marketplace`, `rbac/zones`, `what-if`, `ocr/extract` |
+
+Detalhe e estado: [`ROADMAP-FAUCON.md`](./ROADMAP-FAUCON.md) e `docs/features/`.
+
+---
+
+## 16. Glossário
 
 | Termo | Significado |
 |-------|-------------|

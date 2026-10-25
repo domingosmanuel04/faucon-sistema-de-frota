@@ -193,8 +193,8 @@ Route::prefix(config('fleetops.api.routing.prefix'))->namespace('Fleetbase\Fleet
                 $router->match(['post', 'patch'], '{id}/dispatch', 'OrderController@dispatchOrder');
                 $router->post('{id}/start', 'OrderController@startOrder');
                 $router->delete('{id}/cancel', 'OrderController@cancelOrder');
-                $router->match(['post', 'patch'], '{id}/update-activity', 'OrderController@updateActivity');
-                $router->post('{id}/complete', 'OrderController@completeOrder');
+                $router->match(['post', 'patch'], '{id}/update-activity', 'FauconApiOrderController@updateActivity');
+                $router->post('{id}/complete', 'FauconApiOrderController@completeOrder');
                 $router->get('{id}/next-activity', 'OrderController@getNextActivity');
                 $router->get('{id}/tracker', 'OrderController@trackerData');
                 $router->get('{id}/eta', 'OrderController@etaData');
@@ -529,7 +529,7 @@ Route::prefix(config('fleetops.api.routing.prefix'))->namespace('Fleetbase\Fleet
                                 $router->get('statuses', $controller('statuses'));
                                 $router->get('types', $controller('types'));
                                 $router->get('label/{id}', $controller('label'));
-                                $router->get('next-activity/{id}', $controller('nextActivity'));
+                                $router->get('next-activity/{id}', 'FauconOrderController@nextActivity');
                                 $router->get('{id}/tracker', 'OrderController@trackerInfo');
                                 $router->get('{id}/eta', 'OrderController@waypointEtas');
                                 $router->post('{id}/ping-driver', $controller('pingDriver'));
@@ -537,7 +537,7 @@ Route::prefix(config('fleetops.api.routing.prefix'))->namespace('Fleetbase\Fleet
                                 $router->post('process-imports', $controller('importFromFiles'));
                                 $router->patch('route/{id}', $controller('editOrderRoute'));
                                 $router->patch('set-destination/{id}/{placeId}', $controller('setDestination'));
-                                $router->patch('update-activity/{id}', $controller('updateActivity'));
+                                $router->patch('update-activity/{id}', 'FauconOrderController@updateActivity');
                                 $router->get('{id}/proofs/{subjectId?}', $controller('proofs'));
                                 $router->patch('bulk-assign-driver', $controller('bulkAssignDriver'));
                                 $router->patch('bulk-cancel', $controller('bulkCancel'));

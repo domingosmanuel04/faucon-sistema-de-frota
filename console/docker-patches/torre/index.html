@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Torre de Controlo · Faucon</title>
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <style>
+    :root{--bg:#0b1220;--panel:#121a2b;--panel2:#182235;--border:#243049;--text:#e8eef9;--muted:#93a0b8;--ok:#22c55e;--warn:#f59e0b;--danger:#ef4444;--accent:#3b82f6}
+    *{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;background:radial-gradient(1200px 600px at 10% -10%,#15233d 0%,var(--bg) 55%);color:var(--text);min-height:100vh}
+    header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(11,18,32,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:10;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:700}.brand img{width:36px;height:36px;border-radius:8px}
+    .actions,.tabs{display:flex;gap:.5rem;flex-wrap:wrap}
+    a.btn,button.btn,.tab{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);padding:.45rem .85rem;border-radius:8px;text-decoration:none;cursor:pointer;font-size:.9rem}
+    button.btn.primary,.tab.active{background:var(--accent);border-color:#2563eb}
+    main{padding:1.25rem 1.5rem 2.5rem;max-width:1200px;margin:0 auto}
+    .hero{margin-bottom:1rem}.hero h1{margin:0 0 .35rem;font-size:1.45rem}.hero p{margin:0;color:var(--muted)}
+    .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:1rem 0}
+    .kpi{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:12px;padding:1rem}
+    .kpi .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+    .kpi .value{font-size:1.6rem;font-weight:700;margin-top:.25rem}.kpi.warn .value{color:var(--warn)}.kpi.danger .value{color:var(--danger)}.kpi.ok .value{color:var(--ok)}
+    .panels{display:grid;gap:1rem;grid-template-columns:1.3fr 1fr}@media(max-width:900px){.panels{grid-template-columns:1fr}}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem}
+    .panel h2{margin:0 0 .75rem;font-size:1rem}
+    .health{padding:.75rem 1rem;border-radius:10px;margin-bottom:1rem;border:1px solid var(--border);background:var(--panel2)}
+    .health.ok{border-color:rgba(34,197,94,.35)}.health.warning,.health.attention{border-color:rgba(245,158,11,.4)}
+    ul.msgs{margin:.4rem 0 0;padding-left:1.1rem;color:var(--muted)}
+    .ex,.row-card{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid var(--border)}
+    .ex:last-child,.row-card:last-child{border-bottom:0}
+    .badge{font-size:.68rem;font-weight:700;text-transform:uppercase;padding:.2rem .45rem;border-radius:999px;background:#334155;color:#e2e8f0;white-space:nowrap}
+    .badge.high{background:rgba(239,68,68,.2);color:#fca5a5}.badge.medium{background:rgba(245,158,11,.2);color:#fcd34d}.badge.low{background:rgba(59,130,246,.2);color:#93c5fd}
+    .ex .body,.row-card .body{flex:1;min-width:0}.title{font-weight:600;font-size:.92rem}.meta{color:var(--muted);font-size:.8rem;margin-top:.15rem}
+    form.grid-form{display:grid;gap:.65rem}label{display:grid;gap:.25rem;font-size:.85rem;color:var(--muted)}
+    input,textarea,select{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.5rem .65rem}
+    .check{display:flex;align-items:center;gap:.5rem;color:var(--text)}.status{color:var(--muted);font-size:.8rem;margin-top:.75rem}
+    .empty{color:var(--muted);font-size:.9rem;padding:.5rem 0}.err{color:#fca5a5;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);padding:.75rem 1rem;border-radius:10px;margin-bottom:1rem}
+    .suggest{border:1px dashed var(--border);border-radius:8px;padding:.6rem .75rem;margin-bottom:.5rem;font-size:.85rem}
+    .tab-panel{display:none}.tab-panel.active{display:block}.mini{font-size:.8rem;color:var(--muted)}
+    .thumbs{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
+    .thumbs img{width:56px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--border);background:#000}
+    #podDetail{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img src="/images/icon.png" alt="Faucon" onerror="this.src='/favicon/favicon-32x32.png'" />
+    <span>Torre de Controlo · Faucon</span>
+  </div>
+  <div class="actions">
+    <button class="btn" id="btnRefresh" type="button">Atualizar</button>
+    <a class="btn" href="/">Consola</a>
+    <a class="btn" href="/tracking/">Tracking</a>
+    <a class="btn" href="/docs/sistema.html">Docs</a>
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <h1>Hub operacional Faucon</h1>
+    <p>Operação, POD, custos, canais (WhatsApp/Multicaixa), previsões e saúde do sistema.</p>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="ops" type="button">Operação</button>
+    <button class="tab" data-tab="pod" type="button">POD</button>
+    <button class="tab" data-tab="costs" type="button">Custos</button>
+    <button class="tab" data-tab="channels" type="button">Canais</button>
+    <button class="tab" data-tab="intel" type="button">IA / Riscos</button>
+    <button class="tab" data-tab="system" type="button">Sistema</button>
+  </div>
+  <div id="error" class="err" hidden></div>
+
+  <section class="tab-panel active" id="tab-ops">
+    <div id="health" class="health ok"><strong>A carregar…</strong></div>
+    <div class="grid" id="kpis"></div>
+    <div class="panels">
+      <div class="panel"><h2>Excepções</h2><div id="exceptions"></div></div>
+      <div class="panel">
+        <h2>SLA</h2>
+        <form class="grid-form" id="slaForm">
+          <label>Atraso máx. (min)<input type="number" name="delay_minutes" min="5" value="30"></label>
+          <label>Não atribuídos após (min)<input type="number" name="alert_unassigned_after_minutes" min="5" value="15"></label>
+          <label class="check"><input type="checkbox" name="pod_required_on_complete" checked> POD obrigatório</label>
+          <label class="check"><input type="checkbox" name="require_exception_reason" checked> Exigir motivo</label>
+          <button class="btn primary" type="submit">Guardar SLA</button>
+        </form>
+        <h2 style="margin-top:1rem">Sugestões</h2>
+        <button class="btn" id="btnSuggest" type="button">Sugerir + confirmar</button>
+        <div id="suggestions" class="status"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-panel" id="tab-pod">
+    <div class="panels">
+      <div class="panel"><h2>Fila POD</h2><div id="podQueue"></div></div>
+      <div class="panel">
+        <h2>Registar POD</h2>
+        <form class="grid-form" id="podForm">
+          <label>UUID da encomenda<input name="order_uuid" required placeholder="uuid"></label>
+          <label>Nome do destinatário<input name="recipient_name"></label>
+          <label>OTP / código<input name="otp" placeholder="1234"></label>
+          <label class="check"><input type="checkbox" name="otp_verified"> OTP verificado</label>
+          <label>URL da foto<input name="photo" placeholder="http://localhost:8000/storage/..."></label>
+          <label>Assinatura (data URL ou texto)<textarea name="signature" rows="2"></textarea></label>
+          <label class="check"><input type="checkbox" name="refused"> Recusado</label>
+          <label>Motivo (se recusado)<input name="reason"></label>
+          <button class="btn primary" type="submit">Guardar POD</button>
+          <button class="btn" id="btnCanComplete" type="button">Verificar se pode concluir</button>
+          <button class="btn primary" id="btnComplete" type="button">Concluir encomenda (com gate POD)</button>
+        </form>
+        <div class="status" id="podStatus"></div>
+        <div id="podDetail" class="mini"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-panel" id="tab-costs">
+    <div class="panels">
+      <div class="panel">
+        <h2>Tarifas de custo</h2>
+        <form class="grid-form" id="costForm">
+          <label>Preço combustível / L<input type="number" step="0.01" name="fuel_price_per_liter" value="800"></label>
+          <label>L / 100 km<input type="number" step="0.1" name="liters_per_100km" value="12"></label>
+          <label>Custo motorista / hora<input type="number" step="0.01" name="driver_cost_per_hour" value="1500"></label>
+          <label>Manutenção / km<input type="number" step="0.01" name="maintenance_per_km" value="25"></label>
+          <label>Moeda<input name="currency" value="AOA"></label>
+          <button class="btn primary" type="submit">Guardar tarifas</button>
+        </form>
+        <h2 style="margin-top:1rem">Liquidação motoristas</h2>
+        <button class="btn" id="btnSettlement" type="button">Calcular</button>
+        <div id="settlement"></div>
+      </div>
+      <div class="panel">
+        <h2>Custo por encomenda</h2>
+        <button class="btn" id="btnCosts" type="button">Calcular</button>
+        <div id="costSummary"></div>
+        <h2 style="margin-top:1rem">Fatura rascunho</h2>
+        <form class="grid-form" id="invoiceForm">
+          <label>UUID encomenda<input name="order_uuid" required></label>
+          <button class="btn primary" type="submit">Gerar draft Ledger</button>
+        </form>
+        <div class="status" id="invoiceStatus"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-panel" id="tab-channels">
+    <div class="panels">
+      <div class="panel">
+        <h2>WhatsApp Business</h2>
+        <form class="grid-form" id="waForm">
+          <label class="check"><input type="checkbox" name="enabled"> Ativo</label>
+          <label class="check"><input type="checkbox" name="dry_run" checked> Dry-run (só logs)</label>
+          <label>Phone Number ID<input name="phone_number_id"></label>
+          <label>Access token<input name="access_token" type="password" placeholder="opcional"></label>
+          <label>Template<input name="default_template_status" value="order_status_pt"></label>
+          <button class="btn primary" type="submit">Guardar</button>
+        </form>
+        <form class="grid-form" id="waSend" style="margin-top:1rem">
+          <label>Para (MSISDN)<input name="to" placeholder="2449..."></label>
+          <label>Mensagem<textarea name="message" rows="2">Olá! A sua encomenda Faucon está a caminho.</textarea></label>
+          <button class="btn" type="submit">Enviar dry-run</button>
+        </form>
+        <div class="status" id="waStatus"></div>
+      </div>
+      <div class="panel">
+        <h2>Multicaixa / pagamentos</h2>
+        <form class="grid-form" id="payForm">
+          <label class="check"><input type="checkbox" name="enabled"> Ativo</label>
+          <label class="check"><input type="checkbox" name="sandbox" checked> Sandbox</label>
+          <label>Merchant ID<input name="merchant_id"></label>
+          <label>API key<input name="api_key" type="password"></label>
+          <label>Moeda<input name="currency" value="AOA"></label>
+          <button class="btn primary" type="submit">Guardar</button>
+        </form>
+        <form class="grid-form" id="payIntent" style="margin-top:1rem">
+          <label>Valor (centavos)<input type="number" name="amount" value="150000"></label>
+          <button class="btn" type="submit">Criar intent</button>
+        </form>
+        <div class="status" id="payStatus"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-panel" id="tab-intel">
+    <div class="panels">
+      <div class="panel"><h2>Previsão de atraso</h2><button class="btn" id="btnPredict" type="button">Calcular</button><div id="predictions"></div></div>
+      <div class="panel"><h2>Anomalias</h2><button class="btn" id="btnAnom" type="button">Analisar</button><div id="anomalies"></div></div>
+    </div>
+    <div class="panel" style="margin-top:1rem">
+      <h2>Planeado vs executado</h2>
+      <button class="btn" id="btnPva" type="button">Comparar</button>
+      <div class="mini" id="pvaAvg"></div>
+      <div id="pvaList"></div>
+    </div>
+  </section>
+
+  <section class="tab-panel" id="tab-system">
+    <div class="panels">
+      <div class="panel"><h2>Saúde</h2><button class="btn" id="btnHealth" type="button">Verificar</button><button class="btn" id="btnEnv" type="button">Ambientes</button><pre id="healthJson" class="mini" style="white-space:pre-wrap"></pre></div>
+      <div class="panel"><h2>Webhooks + Features</h2><button class="btn" id="btnWh" type="button">Estado retry</button><button class="btn" id="btnWhEnq" type="button">Enfileirar retry</button><button class="btn" id="btnFeat" type="button">Flags API</button><pre id="whJson" class="mini" style="white-space:pre-wrap"></pre>
+        <p class="mini">Sentry: defina <code>SENTRY_DSN</code> / <code>SENTRY_LARAVEL_DSN</code> no ambiente. Features em <code>/features/faucon-features.json</code>.</p>
+      </div>
+    </div>
+    <div class="panels" style="margin-top:1rem">
+      <div class="panel">
+        <h2>Plataforma AO</h2>
+        <button class="btn" id="btnCorr" type="button">Corredores</button>
+        <button class="btn" id="btnMkt" type="button">Marketplace</button>
+        <button class="btn" id="btnRbac" type="button">RBAC zonas</button>
+        <button class="btn" id="btnWhatIf" type="button">What-if (−1 motorista)</button>
+        <pre id="platformJson" class="mini" style="white-space:pre-wrap"></pre>
+      </div>
+      <div class="panel">
+        <h2>OCR stub</h2>
+        <form class="grid-form" id="ocrForm">
+          <label>Texto do documento<textarea name="text" rows="3" placeholder="Guia GT-12345 NIF 500000000 LD-00-AA"></textarea></label>
+          <button class="btn primary" type="submit">Extrair</button>
+        </form>
+        <pre id="ocrJson" class="mini" style="white-space:pre-wrap"></pre>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(function(){
+  function token(){try{var s=JSON.parse(localStorage.getItem('ember_simple_auth-session')||'{}');return (s.authenticated&&(s.authenticated.token||s.authenticated.access_token))||null;}catch(e){return null;}}
+  function api(path,opts){opts=opts||{};var headers=Object.assign({'Accept':'application/json','Content-Type':'application/json'},opts.headers||{});var t=token();if(t)headers.Authorization='Bearer '+t;return fetch('/int/v1/'+path.replace(/^\//,''),Object.assign({},opts,{headers:headers,credentials:'include'})).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok){var msg=(j&&(j.error||j.message||j.reason))||(j&&j.errors&&j.errors[0])||('HTTP '+r.status);throw new Error(typeof msg==='string'?msg:JSON.stringify(msg));}return j;});});}
+  function showErr(msg){var el=document.getElementById('error');if(!msg){el.hidden=true;el.textContent='';return;}el.hidden=false;el.textContent=msg;}
+  function listHtml(items, mapFn){if(!items||!items.length)return '<p class="empty">Vazio.</p>';return items.map(mapFn).join('');}
+
+  document.querySelectorAll('.tab').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});btn.classList.add('active');document.getElementById('tab-'+btn.dataset.tab).classList.add('active');});});
+
+  function renderKpis(k){var cards=[['Activas',k.orders_active,''],['Fora SLA',k.orders_delayed,k.orders_delayed>0?'danger':'ok'],['Sem motorista',k.orders_unassigned,k.orders_unassigned>0?'warn':''],['Hoje OK',k.orders_completed_today,'ok'],['Veículos',k.vehicles_online+'/'+k.vehicles_total,''],['Motoristas',k.drivers_online+'/'+k.drivers_total,''],['Issues',k.issues_open,k.issues_open>0?'warn':'ok']];document.getElementById('kpis').innerHTML=cards.map(function(c){return '<div class="kpi '+c[2]+'"><div class="label">'+c[0]+'</div><div class="value">'+c[1]+'</div></div>';}).join('');}
+  function renderHealth(h){var el=document.getElementById('health');el.className='health '+(h.level||'ok');var msgs=(h.messages||[]).map(function(m){return '<li>'+m+'</li>';}).join('');el.innerHTML='<strong>Estado: '+(h.level||'ok')+'</strong>'+(msgs?'<ul class="msgs">'+msgs+'</ul>':'<div class="empty">Sem alertas.</div>');}
+  function renderExceptions(list){document.getElementById('exceptions').innerHTML=listHtml(list,function(e){return '<div class="ex"><span class="badge '+e.severity+'">'+e.severity+'</span><div class="body"><div class="title">'+e.title+'</div><div class="meta">'+(e.ref||'')+(e.status?' · '+e.status:'')+'</div></div></div>';});}
+
+  function loadOps(){showErr('');if(!token())showErr('Faça login na consola primeiro (token ember_simple_auth-session).');return Promise.all([api('control-tower/summary'),api('control-tower/exceptions?limit=40'),api('control-tower/sla')]).then(function(res){renderHealth(res[0].health||{});renderKpis(res[0].kpis||{});renderExceptions(res[1].exceptions||[]);var f=document.getElementById('slaForm'),sla=res[2].sla||{};f.delay_minutes.value=sla.delay_minutes||30;f.alert_unassigned_after_minutes.value=sla.alert_unassigned_after_minutes||15;f.pod_required_on_complete.checked=!!sla.pod_required_on_complete;f.require_exception_reason.checked=!!sla.require_exception_reason;}).catch(function(e){showErr(e.message);});}
+
+  document.getElementById('btnRefresh').onclick=loadOps;
+  document.getElementById('slaForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;api('control-tower/sla',{method:'POST',body:JSON.stringify({delay_minutes:+f.delay_minutes.value,alert_unassigned_after_minutes:+f.alert_unassigned_after_minutes.value,pod_required_on_complete:!!f.pod_required_on_complete.checked,require_exception_reason:!!f.require_exception_reason.checked})}).then(loadOps).catch(function(e){showErr(e.message);});};
+
+  document.getElementById('btnSuggest').onclick=function(){api('control-tower/assignment-suggest?limit=10').then(function(j){var root=document.getElementById('suggestions');if(!j.suggestions||!j.suggestions.length){root.innerHTML='<p class="empty">Sem sugestões.</p>';return;}root.innerHTML=j.suggestions.map(function(s){return '<div class="suggest"><div><strong>'+(s.order_id||s.order_uuid)+'</strong> → '+(s.suggested_driver||'—')+' (score '+s.score+')</div><button class="btn primary" type="button" data-o="'+s.order_uuid+'" data-d="'+(s.suggested_driver_uuid||'')+'">Confirmar atribuição</button><div class="mini">'+s.reason+'</div></div>';}).join('');root.querySelectorAll('button[data-o]').forEach(function(b){b.onclick=function(){if(!b.dataset.d){showErr('Sem motorista');return;}api('control-tower/assign-confirm',{method:'POST',body:JSON.stringify({order_uuid:b.dataset.o,driver_uuid:b.dataset.d,source:'torre_ui'})}).then(function(){b.textContent='Atribuído';b.disabled=true;loadOps();}).catch(function(e){showErr(e.message);});};});}).catch(function(e){showErr(e.message);});};
+
+  function thumbsHtml(photos){if(!photos||!photos.length)return '';return '<div class="thumbs">'+photos.map(function(u){return '<a href="'+u+'" target="_blank" rel="noopener"><img src="'+u+'" alt="POD" loading="lazy" onerror="this.style.display=\'none\'"></a>';}).join('')+'</div>';}
+  function showPodDetail(uuid){api('control-tower/pod/'+encodeURIComponent(uuid)).then(function(j){var p=j.pod||{};var el=document.getElementById('podDetail');el.innerHTML='<strong>Detalhe POD</strong> · '+(j.complete?'completo':'incompleto')+(j.proof_uuid||(p.proof_uuid)?' · proof '+(j.proof_uuid||p.proof_uuid):'')+'<div class="meta">'+(p.recipient_name||'')+(p.captured_at?' · '+p.captured_at:'')+(p.refused?' · RECUSADO: '+(p.reason||''):'')+'</div>'+thumbsHtml(p.photos||[])+(p.signature?'<div class="meta">Assinatura: '+(String(p.signature).slice(0,48))+(String(p.signature).length>48?'…':'')+'</div>':'');document.querySelector('#podForm [name=order_uuid]').value=uuid;}).catch(function(e){showErr(e.message);});}
+  function loadPodQueue(){api('control-tower/pod-queue').then(function(j){document.getElementById('podQueue').innerHTML=listHtml(j.orders,function(o){return '<div class="row-card"><span class="badge '+(o.pod_complete?'low':(o.has_pod?'medium':'high'))+'">'+(o.refused?'recusado':(o.pod_complete?'completo':(o.has_pod?'parcial':'sem POD')))+'</span><div class="body"><div class="title">'+(o.public_id||o.uuid)+'</div><div class="meta">'+o.status+(o.driver_assigned?' · com motorista':' · sem motorista')+(o.recipient_name?' · '+o.recipient_name:'')+'</div>'+thumbsHtml(o.photos)+'<button class="btn" type="button" data-uuid="'+o.uuid+'">Usar / ver</button></div></div>';});document.querySelectorAll('#podQueue button[data-uuid]').forEach(function(b){b.onclick=function(){showPodDetail(b.dataset.uuid);};});}).catch(function(e){showErr(e.message);});}
+  document.getElementById('podForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;var photos=f.photo.value?[f.photo.value]:[];api('control-tower/pod/'+encodeURIComponent(f.order_uuid.value),{method:'POST',body:JSON.stringify({photos:photos,signature:f.signature.value||null,otp:f.otp.value||null,otp_verified:!!f.otp_verified.checked,refused:!!f.refused.checked,reason:f.reason.value||null,recipient_name:f.recipient_name.value||null,checklist:{loaded:true}})}).then(function(j){document.getElementById('podStatus').textContent=(j.complete?'POD completo guardado.':'POD guardado (ainda incompleto).')+(j.proof_uuid?' proof='+j.proof_uuid:'');loadPodQueue();}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnCanComplete').onclick=function(){var uuid=document.querySelector('#podForm [name=order_uuid]').value;if(!uuid){showErr('Indique o UUID');return;}api('control-tower/pod/'+encodeURIComponent(uuid)+'/can-complete').then(function(j){document.getElementById('podStatus').textContent=j.allowed?'Pode concluir.':'Bloqueado: '+(j.reason||'POD incompleto');}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnComplete').onclick=function(){var uuid=document.querySelector('#podForm [name=order_uuid]').value;if(!uuid){showErr('Indique o UUID');return;}api('control-tower/complete-order',{method:'POST',body:JSON.stringify({order_uuid:uuid,source:'torre_ui'})}).then(function(j){document.getElementById('podStatus').textContent=j.completed?'Encomenda concluída.':'Não concluída.';loadPodQueue();loadOps();}).catch(function(e){showErr(e.message);});};
+
+  document.getElementById('costForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;api('control-tower/cost-rates',{method:'POST',body:JSON.stringify({fuel_price_per_liter:+f.fuel_price_per_liter.value,liters_per_100km:+f.liters_per_100km.value,driver_cost_per_hour:+f.driver_cost_per_hour.value,maintenance_per_km:+f.maintenance_per_km.value,currency:f.currency.value})}).then(function(){alert('Tarifas guardadas');}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnCosts').onclick=function(){api('control-tower/cost-summary').then(function(j){document.getElementById('costSummary').innerHTML='<div class="mini">Total estimado: <strong>'+j.total_cost+' '+j.currency+'</strong></div>'+listHtml(j.orders,function(o){return '<div class="row-card"><div class="body"><div class="title">'+(o.public_id||'')+' · '+o.total_cost+' '+o.currency+'</div><div class="meta">'+o.km+' km · '+o.hours+' h · combustível '+o.fuel_cost+'</div></div></div>';});}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnSettlement').onclick=function(){api('control-tower/driver-settlement').then(function(j){document.getElementById('settlement').innerHTML=listHtml(j.settlements,function(s){return '<div class="row-card"><div class="body"><div class="title">'+(s.driver_id||s.driver_uuid)+'</div><div class="meta">'+s.orders_completed+' concluídas · '+s.settlement_amount+' '+s.currency+'</div></div></div>';});}).catch(function(e){showErr(e.message);});};
+  document.getElementById('invoiceForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;api('control-tower/invoice-draft',{method:'POST',body:JSON.stringify({order_uuid:f.order_uuid.value})}).then(function(j){document.getElementById('invoiceStatus').textContent=(j.created?'Criada: ':'Existente: ')+(j.invoice&& (j.invoice.number||j.invoice.public_id));}).catch(function(e){showErr(e.message);});};
+
+  function loadChannels(){Promise.all([api('control-tower/whatsapp'),api('control-tower/payments')]).then(function(res){var wa=res[0].config||{},pay=res[1].config||{},wf=document.getElementById('waForm'),pf=document.getElementById('payForm');wf.enabled.checked=!!wa.enabled;wf.dry_run.checked=wa.dry_run!==false;wf.phone_number_id.value=wa.phone_number_id||'';wf.default_template_status.value=wa.default_template_status||'order_status_pt';pf.enabled.checked=!!pay.enabled;pf.sandbox.checked=pay.sandbox!==false;pf.merchant_id.value=pay.merchant_id||'';pf.currency.value=pay.currency||'AOA';}).catch(function(e){showErr(e.message);});}
+  document.getElementById('waForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;var body={enabled:!!f.enabled.checked,dry_run:!!f.dry_run.checked,phone_number_id:f.phone_number_id.value,default_template_status:f.default_template_status.value};if(f.access_token.value)body.access_token=f.access_token.value;api('control-tower/whatsapp',{method:'POST',body:JSON.stringify(body)}).then(function(){document.getElementById('waStatus').textContent='WhatsApp guardado.';}).catch(function(e){showErr(e.message);});};
+  document.getElementById('waSend').onsubmit=function(ev){ev.preventDefault();var f=ev.target;api('control-tower/whatsapp/dry-run',{method:'POST',body:JSON.stringify({to:f.to.value,message:f.message.value})}).then(function(j){document.getElementById('waStatus').textContent=j.note||'OK';}).catch(function(e){showErr(e.message);});};
+  document.getElementById('payForm').onsubmit=function(ev){ev.preventDefault();var f=ev.target;var body={enabled:!!f.enabled.checked,sandbox:!!f.sandbox.checked,merchant_id:f.merchant_id.value,currency:f.currency.value};if(f.api_key.value)body.api_key=f.api_key.value;api('control-tower/payments',{method:'POST',body:JSON.stringify(body)}).then(function(){document.getElementById('payStatus').textContent='Pagamentos guardados.';}).catch(function(e){showErr(e.message);});};
+  document.getElementById('payIntent').onsubmit=function(ev){ev.preventDefault();var f=ev.target;api('control-tower/payments/intent',{method:'POST',body:JSON.stringify({amount:+f.amount.value})}).then(function(j){document.getElementById('payStatus').textContent=(j.intent&&j.intent.checkout_hint)||JSON.stringify(j.intent);}).catch(function(e){showErr(e.message);});};
+
+  document.getElementById('btnPredict').onclick=function(){api('control-tower/delay-prediction').then(function(j){document.getElementById('predictions').innerHTML=listHtml(j.predictions,function(p){return '<div class="row-card"><span class="badge '+p.delay_risk+'">'+p.delay_risk+'</span><div class="body"><div class="title">'+(p.public_id||'')+' · p='+p.delay_probability+'</div><div class="meta">elapsed '+p.elapsed_seconds+'s / expected '+p.expected_seconds+'s</div></div></div>';});}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnAnom').onclick=function(){api('control-tower/anomalies').then(function(j){document.getElementById('anomalies').innerHTML=listHtml(j.anomalies,function(a){return '<div class="row-card"><span class="badge '+a.severity+'">'+a.severity+'</span><div class="body"><div class="title">'+a.title+'</div><div class="meta">'+(a.ref||'')+' · '+(a.detail||'')+'</div></div></div>';});}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnPva').onclick=function(){api('control-tower/planned-vs-actual').then(function(j){document.getElementById('pvaAvg').textContent=j.avg_time_variance_pct!=null?'Variância média de tempo: '+j.avg_time_variance_pct+'%':'Sem amostras com duração real.';document.getElementById('pvaList').innerHTML=listHtml(j.comparisons,function(c){return '<div class="row-card"><span class="badge '+(c.comparison_status==='late'||c.comparison_status==='overrun'?'high':(c.comparison_status==='ahead'?'low':'medium'))+'">'+c.comparison_status+'</span><div class="body"><div class="title">'+(c.public_id||c.uuid)+'</div><div class="meta">planeado '+(c.planned_time_s||'—')+'s · real '+(c.actual_time_s!=null?c.actual_time_s:'—')+'s · var '+(c.time_variance_pct!=null?c.time_variance_pct+'%':'—')+'</div></div></div>';});}).catch(function(e){showErr(e.message);});};
+  function loadSystem(){api('control-tower/health').then(function(j){document.getElementById('healthJson').textContent=JSON.stringify(j,null,2);}).catch(function(e){showErr(e.message);});}
+  document.getElementById('btnHealth').onclick=loadSystem;
+  document.getElementById('btnEnv').onclick=function(){api('control-tower/environments').then(function(j){document.getElementById('healthJson').textContent=JSON.stringify(j,null,2);}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnWh').onclick=function(){api('control-tower/webhooks/retry-status').then(function(j){document.getElementById('whJson').textContent=JSON.stringify(j,null,2);}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnWhEnq').onclick=function(){api('control-tower/webhooks/retry-enqueue',{method:'POST',body:JSON.stringify({url:'https://example.invalid/hook'})}).then(function(j){document.getElementById('whJson').textContent=JSON.stringify(j,null,2);}).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnFeat').onclick=function(){api('control-tower/features').then(function(j){document.getElementById('whJson').textContent=JSON.stringify(j.features||j,null,2);}).catch(function(e){showErr(e.message);});};
+  function showPlatform(j){document.getElementById('platformJson').textContent=JSON.stringify(j,null,2);}
+  document.getElementById('btnCorr').onclick=function(){api('control-tower/corridors').then(showPlatform).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnMkt').onclick=function(){api('control-tower/marketplace').then(showPlatform).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnRbac').onclick=function(){api('control-tower/rbac/zones').then(showPlatform).catch(function(e){showErr(e.message);});};
+  document.getElementById('btnWhatIf').onclick=function(){api('control-tower/what-if',{method:'POST',body:JSON.stringify({remove_drivers:1,extra_orders:0})}).then(showPlatform).catch(function(e){showErr(e.message);});};
+  document.getElementById('ocrForm').onsubmit=function(ev){ev.preventDefault();api('control-tower/ocr/extract',{method:'POST',body:JSON.stringify({text:ev.target.text.value||'Guia GT-12345 NIF 500000000 LD-12-AB'})}).then(function(j){document.getElementById('ocrJson').textContent=JSON.stringify(j,null,2);}).catch(function(e){showErr(e.message);});};
+
+  // preload tab data when switching
+  document.querySelector('.tab[data-tab="pod"]').addEventListener('click',loadPodQueue);
+  document.querySelector('.tab[data-tab="channels"]').addEventListener('click',loadChannels);
+  document.querySelector('.tab[data-tab="system"]').addEventListener('click',loadSystem);
+  document.querySelector('.tab[data-tab="intel"]').addEventListener('click',function(){document.getElementById('btnPredict').click();document.getElementById('btnAnom').click();document.getElementById('btnPva').click();});
+  document.querySelector('.tab[data-tab="costs"]').addEventListener('click',function(){api('control-tower/cost-rates').then(function(j){var r=j.rates||{},f=document.getElementById('costForm');f.fuel_price_per_liter.value=r.fuel_price_per_liter;f.liters_per_100km.value=r.liters_per_100km;f.driver_cost_per_hour.value=r.driver_cost_per_hour;f.maintenance_per_km.value=r.maintenance_per_km;f.currency.value=r.currency||'AOA';}).catch(function(){});});
+
+  loadOps();
+  setInterval(loadOps,60000);
+})();
+</script>
+</body>
+</html>
